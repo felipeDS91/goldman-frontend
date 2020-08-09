@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosCheckmark } from 'react-icons/io';
-import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
 import { ToastSuccess, MessageError } from '~/components/Message';
