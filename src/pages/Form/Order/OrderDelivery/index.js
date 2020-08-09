@@ -141,7 +141,6 @@ export default function OrderDelivery({ formRef }) {
                 </Button>
               </Column>
             </Row>
-            <Address />
             <Address prefix="delivery_" />
           </>
         )}
