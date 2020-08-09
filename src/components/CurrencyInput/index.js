@@ -30,7 +30,7 @@ const CurrencyInput = forwardRef(
 
     useEffect(() => {
       if (defaultValue && !curr) setCurr(defaultValue);
-    }, [curr, defaultValue]); // eslint-disable-line
+    }, [defaultValue]); // eslint-disable-line
 
     const props = {
       ...rest,
