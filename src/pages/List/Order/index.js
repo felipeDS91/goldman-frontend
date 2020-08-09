@@ -113,9 +113,10 @@ export default function ListOrders() {
       >
         <thead>
           <tr>
-            <th width="10%">Nº</th>
-            <th width="38%">CLIENTE</th>
-            <th width="30%">DATA</th>
+            <th width="5%">Nº</th>
+            <th width="30%">CLIENTE</th>
+            <th width="20%">STATUS</th>
+            <th width="20%">DATA</th>
             <th width="130px">VALOR</th>
           </tr>
         </thead>
@@ -125,6 +126,7 @@ export default function ListOrders() {
               <tr key={order.id}>
                 <td>{order.id}</td>
                 <td>{order.customer.name}</td>
+                <td>{order.status.description}</td>
                 <td>{order.createdAt}</td>
                 <td align="center">{order.total}</td>
                 <td align="center">
