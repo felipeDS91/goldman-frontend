@@ -23,6 +23,9 @@ const CurrencyInput = forwardRef(
           name: fieldName,
           ref: ref.current,
           getValue: parseSelectValue,
+          setValue(inputRef, value) {
+            setCurr(value);
+          },
           path: 'props.value',
         });
       }

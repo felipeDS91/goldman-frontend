@@ -5,10 +5,12 @@ import { Input, CurrencyInput, Textarea, Select, CheckBox } from '~/components';
 import { Row, Column } from '~/styles/Default';
 import api from '~/services/api';
 import Stone from '../Stone';
+import { useOrder } from '~/context/Order';
 
 function Alliance({ index }) {
   const [finishings, setFinishings] = useState([]);
   const [colors, setColors] = useState([]);
+  const { calculateTotal } = useOrder();
 
   async function loadFinishings() {
     const response = await api.get(`/finishings`);
@@ -49,7 +51,11 @@ function Alliance({ index }) {
             <Input type="number" step="any" name="weight" label="Peso" />
           </Column>
           <Column width="25%">
-            <CurrencyInput name="value" label="Valor" />
+            <CurrencyInput
+              name="value"
+              label="Valor"
+              onKeyUp={calculateTotal}
+            />
           </Column>
           <Column width="15%">
             <CheckBox name="anatomical" label="Anatômica" />
@@ -97,7 +103,7 @@ function Alliance({ index }) {
         </Row>
         <Stone indexDetail={index} />
         <Row>
-          <Textarea name="observation" label="Observações" />
+          <Textarea name="observation" label="Observações" rows="4" />
         </Row>
       </Scope>
     </>

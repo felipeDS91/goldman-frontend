@@ -20,8 +20,8 @@ export default function Textarea({ name, label, ...props }) {
     <Wrapper>
       {label && <label htmlFor={fieldName}>{label}</label>}
       <textarea
-        id={name}
-        name={name}
+        id={fieldName}
+        name={fieldName}
         label={label}
         defaultValue={defaultValue}
         ref={ref}

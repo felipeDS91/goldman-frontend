@@ -5,9 +5,11 @@ import { Input, CurrencyInput, Textarea, Select } from '~/components';
 import { Row, Column } from '~/styles/Default';
 import Stone from '../Stone';
 import api from '~/services/api';
+import { useOrder } from '~/context/Order';
 
 function Ring({ index }) {
   const [colors, setColors] = useState([]);
+  const { calculateTotal } = useOrder();
 
   async function loadColors() {
     const response = await api.get(`/colors`);
@@ -39,7 +41,11 @@ function Ring({ index }) {
             />
           </Column>
           <Column width="25%">
-            <CurrencyInput name="value" label="Valor" />
+            <CurrencyInput
+              name="value"
+              label="Valor"
+              onKeyUp={calculateTotal}
+            />
           </Column>
           <Column width="50%">
             <Select name="id_color" label="Tonalidade" options={colors} />
@@ -47,7 +53,7 @@ function Ring({ index }) {
         </Row>
         <Stone indexDetail={index} />
         <Row>
-          <Textarea name="observation" label="Observações" />
+          <Textarea name="observation" label="Observações" rows="4" />
         </Row>
       </Scope>
     </>

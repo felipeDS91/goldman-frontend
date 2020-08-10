@@ -10,6 +10,7 @@ import {
 } from '~/components';
 import { Row, Column, Card, Button } from '~/styles/Default';
 import api from '~/services/api';
+import { useOrder } from '~/context/Order';
 
 const methods = [
   {
@@ -33,6 +34,7 @@ export default function OrderDelivery({ formRef }) {
   const [data, setData] = useState({});
   const [carriers, setCarriers] = useState([]);
   const [freightTypes, setFreightTypes] = useState([]);
+  const { calculateTotal } = useOrder();
 
   async function loadCarriers() {
     const response = await api.get(`/carriers`);
@@ -77,9 +79,7 @@ export default function OrderDelivery({ formRef }) {
   useEffect(() => {
     loadCarriers();
     loadFreightTypes();
-
-    // eslint-disable-next-line
-  }, []);
+  }, []); // eslint-disable-next-line
 
   return (
     <Collapsible title="MÉTODO DE ENVIO">
@@ -112,7 +112,11 @@ export default function OrderDelivery({ formRef }) {
                 />
               </Column>
               <Column>
-                <CurrencyInput name="delivery_value" label="Valor" />
+                <CurrencyInput
+                  name="delivery_value"
+                  label="Valor"
+                  onKeyUp={calculateTotal}
+                />
               </Column>
               <Column width="130px">
                 <Button
@@ -130,7 +134,11 @@ export default function OrderDelivery({ formRef }) {
           <>
             <Row>
               <Column width="100%">
-                <CurrencyInput name="delivery_value" label="Valor" />
+                <CurrencyInput
+                  name="delivery_value"
+                  label="Valor"
+                  onKeyUp={calculateTotal}
+                />
               </Column>
               <Column width="50px">
                 <Button

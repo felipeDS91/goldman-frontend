@@ -28,7 +28,7 @@ const products = [
 ];
 
 export default function OrderDetail() {
-  const { order, setOrder } = useOrder();
+  const { order, setOrder, calculateTotal } = useOrder();
 
   async function addItem() {
     setOrder({
@@ -50,6 +50,7 @@ export default function OrderDetail() {
       ...order,
       order_details: order.order_details.filter(elem => elem.id !== idDetail),
     });
+    calculateTotal();
   }
 
   return (
@@ -64,7 +65,7 @@ export default function OrderDetail() {
                     name={`order_details[${index}].item_type`}
                     label="Tipo de Jóia"
                     options={products}
-                    onChange={value =>
+                    onChange={value => {
                       setOrder({
                         ...order,
                         order_details: order.order_details.map(item =>
@@ -72,8 +73,8 @@ export default function OrderDetail() {
                             ? { ...item, item_type: value }
                             : item
                         ),
-                      })
-                    }
+                      });
+                    }}
                   />
                 </Column>
                 <Column width="160px">

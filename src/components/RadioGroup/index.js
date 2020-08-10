@@ -24,7 +24,7 @@ function RadioGroup({ name, label, options, onChange }) {
         getValue: parseSelectValue,
       });
     }
-  }, [ref.current, fieldName]); // eslint-disable-line
+  }, [fieldName, registerField]); // eslint-disable-line
 
   useEffect(() => {
     if (defaultValue && !selected) {

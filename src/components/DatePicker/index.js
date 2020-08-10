@@ -28,15 +28,17 @@ export default function DatePicker({
   setDefaultLocale('ptBR');
 
   useEffect(() => {
-    registerField({
-      name: fieldName,
-      ref: ref.current,
-      path: 'props.selected',
-      clearValue: pickerRef => {
-        pickerRef.clear();
-      },
-    });
-  }, [ref.current, fieldName]); // eslint-disable-line
+    if (ref.current) {
+      registerField({
+        name: fieldName,
+        ref: ref.current,
+        path: 'props.selected',
+        clearValue: pickerRef => {
+          pickerRef.clear();
+        },
+      });
+    }
+  }, [fieldName, registerField]); // eslint-disable-line
 
   useEffect(() => {
     if (defaultValue && !selected) setSelected(parseISO(defaultValue));
@@ -51,6 +53,7 @@ export default function DatePicker({
         customInput={readOnly ? <CustomDate /> : null}
         name={fieldName}
         selected={selected}
+        autoComplete="off"
         onChange={date => {
           if (onChange) onChange(date);
           setSelected(date);

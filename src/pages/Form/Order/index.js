@@ -236,7 +236,6 @@ export default function FormOrder({ match }) {
 
   async function handleSubmit(sendData) {
     try {
-      // console.log(sendData);
       if (editMode) {
         await api.put(`orders/${id}`, sendData);
       } else {
@@ -307,7 +306,7 @@ export default function FormOrder({ match }) {
 
   return (
     <Container>
-      <OrderProvider initialOrder={data}>
+      <OrderProvider initialOrder={data} formRef={formRef}>
         <PageHeader>
           <TitlePage>
             {editMode ? 'Edição' : 'Cadastro'} de pedido
@@ -361,7 +360,7 @@ export default function FormOrder({ match }) {
               />
             </Column>
             <Column>
-              <CurrencyInput name="total" label="Valor total" />
+              <CurrencyInput name="total" label="Valor total" disabled />
             </Column>
             <Column>
               <Input
