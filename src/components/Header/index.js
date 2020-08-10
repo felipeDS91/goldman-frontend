@@ -81,7 +81,9 @@ export default function Header() {
     <Container>
       <Content>
         <nav>
-          <img src={logo} alt="GOLDMAN" width="135" height="34" />
+          <NavLink to="/home">
+            <img src={logo} alt="GOLDMAN" width="135" height="34" />
+          </NavLink>
           <NavLink to="/list-customers">CLIENTES</NavLink>
           <NavLink to="/list-orders">PEDIDOS</NavLink>
           <NavMenu menu={menuRegister}>CADASTROS</NavMenu>
