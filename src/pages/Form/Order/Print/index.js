@@ -127,9 +127,8 @@ export default function Print({ match }) {
                 <Column>{`EMAIL: ${order.customer.email}`}</Column>
               </Row>
               <Row>
-                <Column>{`ENDEREÇO: ${order.customer.address}`}</Column>
-                <Column>{`Nº: ${order.customer.number}`}</Column>
-                <Column>{`COMPLEMENTO: ${order.customer.complement}`}</Column>
+                <Column width="66.66%">{`ENDEREÇO: ${order.customer.address} nº: ${order.customer.number}`}</Column>
+                <Column width="33.33%">{`COMPLEMENTO: ${order.customer.complement}`}</Column>
               </Row>
               <Row>
                 <Column>{`BAIRRO: ${order.customer.neighborhood}`}</Column>
