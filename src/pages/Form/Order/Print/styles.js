@@ -17,11 +17,11 @@ export const Container = styled.div`
 `;
 
 export const Card = styled.div`
-  /* margin: 20px; */
   padding: 14px;
-  background: #f2f2f2;
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0 0 10px;
+  border: 1px solid #dddddd;
+  /* background: #f2f2f2; */
+  /* box-shadow: rgba(0, 0, 0, 0.3) 0 0 10px; */
 `;
 
 export const Content = styled.div`
@@ -40,7 +40,6 @@ export const Content = styled.div`
     height: 100px;
     display: inline-block;
     vertical-align: middle;
-    border: 1px solid #dddddd;
   }
 
   @media print {

@@ -105,7 +105,7 @@ export default function Print({ match }) {
               <HeaderRow>{`Fone: ${company.phone} Celular: ${company.cellphone}`}</HeaderRow>
               <HeaderRow>{`Email: ${company.email}`}</HeaderRow>
             </Column>
-            <Column width="300px">
+            <Column style={{ border: '1px solid #dddddd' }} width="300px">
               <HeaderRow>{`PEDIDO Nº: ${id.padStart(6, '0')}`}</HeaderRow>
               <HeaderRow>{`DATA: ${order.date}`}</HeaderRow>
               <HeaderRow>{`VENDEDOR: ${order.user &&
@@ -156,9 +156,7 @@ export default function Print({ match }) {
                       <>
                         <Row>
                           <Column>DESCRIÇÃO: Anel</Column>
-                          <Column>
-                            TAMANHO DO ARO: {detail.ring_size_1} mm
-                          </Column>
+                          <Column>TAMANHO DO ARO: {detail.ring_size_1}</Column>
                         </Row>
                         <Row>
                           <Column>
@@ -180,7 +178,7 @@ export default function Print({ match }) {
 
                         <Row>
                           <Column>
-                            TAMANHO ARO MENOR: {detail.ring_size_1} mm
+                            TAMANHO ARO MENOR: {detail.ring_size_1}
                           </Column>
                           <Column>
                             GRAVAÇÃO ARO MENOR: {detail.recording_1}
@@ -189,7 +187,7 @@ export default function Print({ match }) {
 
                         <Row>
                           <Column>
-                            TAMANHO ARO MAIOR: {detail.ring_size_2} mm
+                            TAMANHO ARO MAIOR: {detail.ring_size_2}
                           </Column>
                           <Column>
                             GRAVAÇÃO ARO MAIOR: {detail.recording_2}
@@ -208,8 +206,10 @@ export default function Print({ match }) {
                     )}
                     <Row>OBSERVAÇÕES: {detail.observation}</Row>
 
-                    {detail.order_detail_stones && (
+                    {detail.order_detail_stones ? (
                       <Row style={{ fontWeight: 'bold' }}>PEDRAS</Row>
+                    ) : (
+                      <Row style={{ fontWeight: 'bold' }}>PEDRAS: Não tem</Row>
                     )}
                     {detail.order_detail_stones &&
                       detail.order_detail_stones.map(stone => {
