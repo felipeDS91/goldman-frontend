@@ -206,7 +206,7 @@ export default function Print({ match }) {
                     )}
                     <Row>OBSERVAÇÕES: {detail.observation}</Row>
 
-                    {detail.order_detail_stones ? (
+                    {detail.order_detail_stones.length > 0 ? (
                       <Row style={{ fontWeight: 'bold' }}>PEDRAS</Row>
                     ) : (
                       <Row style={{ fontWeight: 'bold' }}>PEDRAS: Não tem</Row>
