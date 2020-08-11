@@ -323,7 +323,6 @@ export default function FormOrder({ match }) {
             </SaveButton>
           </Options>
         </PageHeader>
-
         <Form
           id="form"
           initialData={data}

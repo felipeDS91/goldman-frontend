@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
+import { IoMdPrint } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import history from '~/services/history';
 
 import { formatPrice, formatDateTime } from '~/util/format';
 import { Pagination, Search, Table } from '~/components';
@@ -12,6 +14,7 @@ import {
   PageHeader,
   Options,
   EditButton,
+  PrintButton,
   RemoveButton,
 } from '~/styles/Default';
 import { Container } from './styles';
@@ -129,6 +132,15 @@ export default function ListOrders() {
                 <td>{order.status.description}</td>
                 <td>{order.createdAt}</td>
                 <td align="center">{order.total}</td>
+                <td align="center">
+                  <PrintButton
+                    onClick={() => history.push(`/print-order/${order.id}`)}
+                    title="Imprimir pedido"
+                    background="#EFEFEF"
+                  >
+                    <IoMdPrint size={20} color="#ee4d64" />
+                  </PrintButton>
+                </td>
                 <td align="center">
                   <EditButton to={`/order/${order.id}`}>editar</EditButton>
                 </td>

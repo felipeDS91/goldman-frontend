@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
   background: #fff;
   padding: 0 30px;
+
+  @media print {
+    display: none;
+  }
 `;
 
 export const Content = styled.div`

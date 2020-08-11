@@ -27,6 +27,7 @@ import FormCarrier from '~/pages/Form/Carrier';
 import ListFreightTypes from '~/pages/List/FreightType';
 import FormFreightType from '~/pages/Form/FreightType';
 import FormCompany from '~/pages/Form/Company';
+import PrintOrder from '~/pages/Form/Order/Print';
 
 export default function Routes() {
   return (
@@ -39,6 +40,7 @@ export default function Routes() {
       <Route path="/list-orders" component={ListOrders} isPrivate />
       <Route path="/order" exact component={FormOrder} isPrivate />
       <Route path="/order/:id" exact component={FormOrder} isPrivate />
+      <Route path="/print-order/:id" exact component={PrintOrder} isPrivate />
 
       <Route path="/list-customers" component={ListCustomers} isPrivate />
       <Route path="/customer" exact component={FormCustomer} isPrivate />

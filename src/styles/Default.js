@@ -6,6 +6,7 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   align-content: space-between;
+  width: 100%;
 `;
 
 export const Column = styled.div`
@@ -91,6 +92,9 @@ export const PageHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 20px auto;
+  @media print {
+    display: none;
+  }
 `;
 
 export const TitlePage = styled.strong`
@@ -120,7 +124,32 @@ export const SaveButton = styled.button`
   }
 `;
 
-export const BackButton = styled.button`
+export const PrintButton = styled.button.attrs(props => ({
+  type: 'button',
+}))`
+  display: flex;
+  align-items: center;
+  border: 0;
+  border-radius: 4px;
+  height: 36px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background: ${props => props.background};
+
+  svg {
+    margin-right: ${props => (props.children.length > 1 ? '10px' : '0')};
+  }
+
+  &:hover {
+    background: ${props => props.background && darken(0.08, props.background)};
+  }
+`;
+
+export const BackButton = styled.button.attrs(props => ({
+  type: 'button',
+}))`
   display: flex;
   align-items: center;
   border: 0;
@@ -182,6 +211,20 @@ export const EditButton = styled(Link)`
     color: ${darken(0.08, '#4d85ee')};
   }
 `;
+
+// export const PrintButton = styled(Link)`
+//   width: 50px;
+//   color: #4d85ee;
+//   text-align: right;
+//   font-size: 15px;
+//   background: red;
+//   border: solid 1px #d6d7da;
+//   border-radius: 4px;
+
+//   &:hover {
+//     color: ${darken(0.08, '#4d85ee')};
+//   }
+// `;
 
 export const RemoveButton = styled.td`
   width: 60px;
