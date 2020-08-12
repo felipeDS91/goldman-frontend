@@ -231,6 +231,7 @@ export default function FormOrder({ match }) {
   const [status, setStatus] = useState([]);
   const [data, setData] = useState({
     order_details: [{ id: 1, amount: 1 }],
+    order_payments: [{ id: 1 }],
   });
   const profile = useSelector(state => state.user.profile);
 

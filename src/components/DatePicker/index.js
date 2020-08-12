@@ -22,7 +22,7 @@ export default function DatePicker({
 }) {
   const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
-  const [selected, setSelected] = useState(defaultValue);
+  const [selected, setSelected] = useState(undefined);
 
   registerLocale('ptBR', ptBR);
   setDefaultLocale('ptBR');

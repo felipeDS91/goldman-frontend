@@ -20,17 +20,19 @@ export default function Stone({ indexDetail: i }) {
         index === i
           ? {
               ...detail,
-              order_detail_stones: detail.order_detail_stones
-                ? [
-                    ...detail.order_detail_stones,
-                    {
-                      id:
-                        detail.order_detail_stones
-                          .map(elem => elem.id)
-                          .reduce((a, b) => Math.max(a, b)) + 1,
-                    },
-                  ]
-                : [{ id: 1 }],
+              order_detail_stones:
+                detail.order_detail_stones &&
+                detail.order_detail_stones.length > 0
+                  ? [
+                      ...detail.order_detail_stones,
+                      {
+                        id:
+                          detail.order_detail_stones
+                            .map(elem => elem.id)
+                            .reduce((a, b) => Math.max(a, b)) + 1,
+                      },
+                    ]
+                  : [{ id: 1 }],
             }
           : detail
       ),
@@ -66,7 +68,8 @@ export default function Stone({ indexDetail: i }) {
 
   useEffect(() => {
     loadMaterials();
-  }, []); // eslint-disable-next-line
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>

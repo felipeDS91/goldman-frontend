@@ -79,7 +79,8 @@ export default function OrderDelivery({ formRef }) {
   useEffect(() => {
     loadCarriers();
     loadFreightTypes();
-  }, []); // eslint-disable-next-line
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Collapsible title="MÉTODO DE ENVIO">

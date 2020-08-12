@@ -6,10 +6,10 @@ import { CurrencyInput, Select, Collapsible, DatePicker } from '~/components';
 import { DelDetail } from './styles';
 import { Row, Column, Card, AddButton } from '~/styles/Default';
 import api from '~/services/api';
+import { useOrder } from '~/context/Order';
 
 export default function OrderPayment() {
-  const [payments, setPayments] = useState([{ id: 0 }]);
-  const [idItem, setIdItem] = useState(1);
+  const { order, setOrder, calculateTotal } = useOrder();
   const [paymentTypes, setPaymentTypes] = useState([]);
 
   async function loadPaymentType() {
@@ -22,12 +22,28 @@ export default function OrderPayment() {
   }
 
   async function addPayment() {
-    setPayments([...payments, { ...payments, id: idItem }]);
-    setIdItem(idItem + 1);
+    setOrder({
+      ...order,
+      order_payments: [
+        ...order.order_payments,
+        {
+          id:
+            order.order_payments
+              .map(elem => elem.id)
+              .reduce((a, b) => Math.max(a, b)) + 1,
+        },
+      ],
+    });
   }
 
   async function delPayment(idPayment) {
-    setPayments(payments.filter(elem => elem.id !== idPayment));
+    setOrder({
+      ...order,
+      order_payments: order.order_payments.filter(
+        elem => elem.id !== idPayment
+      ),
+    });
+    calculateTotal();
   }
 
   useEffect(() => {
@@ -38,8 +54,8 @@ export default function OrderPayment() {
 
   return (
     <Collapsible title="FORMA DE PAGAMENTO">
-      {payments &&
-        payments.map((detail, index) => {
+      {order.order_payments &&
+        order.order_payments.map((detail, index) => {
           return (
             <Card key={detail.id}>
               <Scope path={`order_payments[${index}]`}>
@@ -62,7 +78,7 @@ export default function OrderPayment() {
                   <Column width="120px">
                     <DelDetail
                       type="button"
-                      disabled={payments.length === 1}
+                      disabled={order.order_payments.length === 1}
                       onClick={() => delPayment(detail.id)}
                     >
                       <IoIosRemoveCircleOutline size={18} color="#ee4d64" />
