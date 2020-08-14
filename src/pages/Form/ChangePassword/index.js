@@ -30,7 +30,7 @@ const schema = Yup.object().shape({
 export default function FormChangePassword() {
   async function handleSubmit(sendData) {
     try {
-      await api.put('users', sendData);
+      await api.put('change-password', sendData);
 
       ToastSuccess('Senha alterada com sucesso');
       history.push('/home');
