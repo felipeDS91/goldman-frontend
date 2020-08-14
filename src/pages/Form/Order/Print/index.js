@@ -170,11 +170,13 @@ export default function Print({ match }) {
                       <>
                         <Row>
                           <Column>DESCRIÇÃO: Aliança</Column>
-                          <Column>LARGURA: {detail.width} mm</Column>
-                          <Column>PESO: {detail.weight} </Column>
                           <Column>VALOR: {detail.value}</Column>
                         </Row>
 
+                        <Row>
+                          <Column>LARGURA: {detail.width} mm</Column>
+                          <Column>PESO: {detail.weight} </Column>
+                        </Row>
                         <Row>
                           <Column>
                             TAMANHO ARO MENOR: {detail.ring_size_1}
@@ -197,6 +199,12 @@ export default function Print({ match }) {
                           <Column>
                             FORMATO EXTERNO: {detail.finishing.description}
                           </Column>
+                          <Column>
+                            FORMATO INTERNO:{' '}
+                            {detail.anatomical ? 'Anatômica' : 'Reta'}
+                          </Column>
+                        </Row>
+                        <Row>
                           <Column>
                             TONALIDADE: {detail.color.description}
                           </Column>

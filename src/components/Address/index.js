@@ -20,12 +20,10 @@ function Address({ prefix = '' }) {
     try {
       const res = await consultaCep(value);
 
-      refState.current.value = res.state ? res.state.toUpperCase() : '';
-      refCity.current.value = res.city ? res.city.toUpperCase() : '';
-      refNeighborhood.current.value = res.neighborhood
-        ? res.neighborhood.toUpperCase()
-        : '';
-      refAddress.current.value = res.street ? res.street.toUpperCase() : '';
+      refState.current.value = res.state ? res.state : '';
+      refCity.current.value = res.city ? res.city : '';
+      refNeighborhood.current.value = res.neighborhood ? res.neighborhood : '';
+      refAddress.current.value = res.street ? res.street : '';
     } catch (e) {
       setLoading(false);
 
