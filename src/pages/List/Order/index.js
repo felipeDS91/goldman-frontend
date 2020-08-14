@@ -131,7 +131,15 @@ export default function ListOrders() {
                 <td>{order.customer.name}</td>
                 <td>{order.status.description}</td>
                 <td>{order.createdAt}</td>
-                <td align="center">{order.total}</td>
+                <td
+                  align="center"
+                  style={{
+                    color: order.paid ? '#6daf6d' : '#ff6767',
+                  }}
+                  title={order.paid ? 'Pago' : 'Em aberto'}
+                >
+                  {order.total}
+                </td>
                 <td align="center">
                   <PrintButton
                     onClick={() => history.push(`/print-order/${order.id}`)}
