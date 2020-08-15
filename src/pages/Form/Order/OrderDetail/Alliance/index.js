@@ -78,8 +78,6 @@ function Alliance({ index }) {
               step="any"
               name="ring_size_2"
               label="Tamanho aro maior"
-              // min="8"
-              // max="35"
             />
           </Column>
           <Column>

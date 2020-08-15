@@ -4,6 +4,7 @@ import Route from './Route';
 
 import SignIn from '../pages/SignIn';
 
+import PageNotFound from '~/pages/PageNotFound';
 import Home from '~/pages/Home';
 import ListCustomers from '~/pages/List/Customer';
 import FormCustomer from '~/pages/Form/Customer';
@@ -98,6 +99,9 @@ export default function Routes() {
         component={FormChangePassword}
         isPrivate
       />
+
+      <Route path="*" exact component={PageNotFound} isPrivate />
+      {/* <Route path="/teste" exact component={PageNotFound} isPrivate /> */}
     </Switch>
   );
 }

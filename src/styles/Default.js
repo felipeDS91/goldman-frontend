@@ -212,20 +212,6 @@ export const EditButton = styled(Link)`
   }
 `;
 
-// export const PrintButton = styled(Link)`
-//   width: 50px;
-//   color: #4d85ee;
-//   text-align: right;
-//   font-size: 15px;
-//   background: red;
-//   border: solid 1px #d6d7da;
-//   border-radius: 4px;
-
-//   &:hover {
-//     color: ${darken(0.08, '#4d85ee')};
-//   }
-// `;
-
 export const RemoveButton = styled.td`
   width: 60px;
   border: 0;
