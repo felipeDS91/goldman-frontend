@@ -55,6 +55,13 @@ export default function Print({ match }) {
     setOrder(dataFormatted);
   }
 
+  function printOrder() {
+    const originalTitle = document.title;
+    document.title = `pedido-n${order.id}`;
+    window.print();
+    document.title = originalTitle;
+  }
+
   async function loadCompany() {
     const { data } = await api.get(`/company`);
 
@@ -81,7 +88,7 @@ export default function Print({ match }) {
             <IoIosArrowBack size={16} color="#FFF" />
             VOLTAR
           </BackButton>
-          <PrintButton background="#ee4d64" onClick={() => window.print()}>
+          <PrintButton background="#ee4d64" onClick={printOrder}>
             <IoMdPrint size={26} color="#FFF" />
             IMPRIMIR
           </PrintButton>
@@ -105,7 +112,10 @@ export default function Print({ match }) {
               <HeaderRow>{`Fone: ${company.phone} Celular: ${company.cellphone}`}</HeaderRow>
               <HeaderRow>{`Email: ${company.email}`}</HeaderRow>
             </Column>
-            <Column style={{ border: '1px solid #dddddd' }} width="300px">
+            <Column
+              style={{ border: '1px solid #dddddd', padding: '2px' }}
+              width="300px"
+            >
               <HeaderRow>{`PEDIDO Nº: ${id.padStart(6, '0')}`}</HeaderRow>
               <HeaderRow>{`DATA: ${order.date}`}</HeaderRow>
               <HeaderRow>{`VENDEDOR: ${order.user &&
