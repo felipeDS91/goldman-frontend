@@ -38,15 +38,11 @@ export default function ReactSelect({
   const getValue = useCallback(
     ref => {
       if (multiple) {
-        if (!ref.state.value) {
-          return [];
-        }
+        if (!ref.state.value) return [];
         return ref.state.value.map(option => option.id);
       }
 
-      if (!ref.state.value) {
-        return '';
-      }
+      if (!ref.state.value) return '';
 
       return ref.state.value.id;
     },
@@ -56,9 +52,7 @@ export default function ReactSelect({
   const getDefaultValue = useCallback(() => {
     if (!defaultValue) return null;
 
-    if (!multiple) {
-      return options.find(option => option.id === defaultValue);
-    }
+    if (!multiple) return options.find(option => option.id === defaultValue);
 
     return options.filter(option => defaultValue.includes(option.id));
   }, [defaultValue, multiple, options]);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { Scope } from '@unform/core';
 import { Input, CurrencyInput, Textarea, Select } from '~/components';
@@ -11,7 +11,7 @@ function Ring({ index }) {
   const [colors, setColors] = useState([]);
   const { calculateTotal } = useOrder();
 
-  async function loadColors() {
+  const loadColors = useCallback(async () => {
     const response = await api.get(`/colors`);
 
     const dataFormatted = response.data.docs.map(item => ({
@@ -20,12 +20,11 @@ function Ring({ index }) {
     }));
 
     setColors(dataFormatted);
-  }
+  }, []);
 
   useEffect(() => {
     loadColors();
-    // eslint-disable-next-line
-  }, []);
+  }, [loadColors]);
 
   return (
     <>

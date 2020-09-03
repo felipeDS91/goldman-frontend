@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 
 import { ToastError } from '~/components/Message';
@@ -7,28 +7,31 @@ import { FormWrapper } from './styles';
 const Form = forwardRef(({ children, schema, onSubmit, ...props }, ref) => {
   if (!ref) ref = useRef(null);
 
-  async function handleSubmit(data) {
-    try {
-      // Remove all previous errors
-      ref.current.setErrors({});
+  const handleSubmit = useCallback(
+    async data => {
+      try {
+        // Remove all previous errors
+        ref.current.setErrors({});
 
-      const validatedData = await schema.validate(data, {
-        abortEarly: false,
-      });
-
-      // Validation passed
-      onSubmit(validatedData);
-    } catch (err) {
-      const validationErrors = {};
-      if (err instanceof Yup.ValidationError) {
-        err.inner.forEach(error => {
-          validationErrors[error.path] = error.message;
+        const validatedData = await schema.validate(data, {
+          abortEarly: false,
         });
-        ToastError('Erro ao validar campos');
-        ref.current.setErrors(validationErrors);
+
+        // Validation passed
+        onSubmit(validatedData);
+      } catch (err) {
+        const validationErrors = {};
+        if (err instanceof Yup.ValidationError) {
+          err.inner.forEach(error => {
+            validationErrors[error.path] = error.message;
+          });
+          ToastError('Erro ao validar campos');
+          ref.current.setErrors(validationErrors);
+        }
       }
-    }
-  }
+    },
+    [onSubmit, ref, schema]
+  );
 
   return (
     <FormWrapper ref={ref} onSubmit={handleSubmit} {...props}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { IoIosArrowBack, IoMdPrint } from 'react-icons/io';
 import PropTypes from 'prop-types';
 import logo from '~/assets/logo-2.svg';
@@ -31,7 +31,7 @@ export default function Print({ match }) {
   const [order, setOrder] = useState({});
   const [company, setCompany] = useState({});
 
-  async function loadOrder() {
+  const loadOrder = useCallback(async () => {
     const { data } = await api.get(`/print-order/${id}`);
 
     const dataFormatted = {
@@ -53,16 +53,16 @@ export default function Print({ match }) {
       }),
     };
     setOrder(dataFormatted);
-  }
+  }, [id]);
 
-  function printOrder() {
+  const printOrder = useCallback(() => {
     const originalTitle = document.title;
     document.title = `pedido-n${order.id}`;
     window.print();
     document.title = originalTitle;
-  }
+  }, [order.id]);
 
-  async function loadCompany() {
+  const loadCompany = useCallback(async () => {
     const { data } = await api.get(`/company`);
 
     const dataFormatted = {
@@ -71,13 +71,12 @@ export default function Print({ match }) {
     };
 
     setCompany(dataFormatted);
-  }
+  }, []);
 
   useEffect(() => {
     loadOrder();
     loadCompany();
-    // eslint-disable-next-line
-  }, []);
+  }, [loadCompany, loadOrder]);
 
   return (
     <Container>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { MdContentCopy } from 'react-icons/md';
 import {
@@ -36,16 +36,16 @@ export default function OrderDelivery({ formRef }) {
   const [freightTypes, setFreightTypes] = useState([]);
   const { calculateTotal } = useOrder();
 
-  async function loadCarriers() {
+  const loadCarriers = useCallback(async () => {
     const response = await api.get(`/carriers`);
     const dataFormatted = response.data.docs.map(item => ({
       id: item.id,
       title: item.name,
     }));
     setCarriers(dataFormatted);
-  }
+  }, []);
 
-  async function copyAddress() {
+  const copyAddress = useCallback(async () => {
     const id = formRef.current.getFieldValue('id_customer');
     if (!id) return;
     const result = await api.get(`/customers/${id}`);
@@ -65,22 +65,21 @@ export default function OrderDelivery({ formRef }) {
       formRef.current.getFieldRef('delivery_complement').value =
         customer.complement;
     }
-  }
+  }, [formRef]);
 
-  async function loadFreightTypes() {
+  const loadFreightTypes = useCallback(async () => {
     const response = await api.get(`/freight-types`);
     const dataFormatted = response.data.docs.map(item => ({
       id: item.id,
       title: item.description,
     }));
     setFreightTypes(dataFormatted);
-  }
+  }, []);
 
   useEffect(() => {
     loadCarriers();
     loadFreightTypes();
-    // eslint-disable-next-line
-  }, []);
+  }, [loadCarriers, loadFreightTypes]);
 
   return (
     <Collapsible title="MÉTODO DE ENVIO">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { IoIosArrowBack, IoIosCheckmark } from 'react-icons/io';
 import * as Yup from 'yup';
 
@@ -42,13 +42,13 @@ const schema = Yup.object().shape({
 export default function FormCompany() {
   const [company, setCompany] = useState({});
 
-  async function loadData() {
+  const loadData = useCallback(async () => {
     const response = await api.get(`/company`);
 
     setCompany(response.data);
-  }
+  }, []);
 
-  async function handleSubmit(data) {
+  const handleSubmit = useCallback(async data => {
     try {
       const clearData = {
         ...data,
@@ -69,13 +69,11 @@ export default function FormCompany() {
 
       MessageError(msg);
     }
-  }
+  }, []);
 
   useEffect(() => {
     loadData();
-
-    // eslint-disable-next-line
-  }, []);
+  }, [loadData]);
 
   return (
     <Container>

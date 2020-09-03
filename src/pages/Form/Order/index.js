@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { IoIosArrowBack, IoIosCheckmark } from 'react-icons/io';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -235,31 +235,34 @@ export default function FormOrder({ match }) {
   });
   const profile = useSelector(state => state.user.profile);
 
-  async function handleSubmit(sendData) {
-    try {
-      if (editMode) {
-        await api.put(`orders/${id}`, sendData);
-      } else {
-        sendData = { ...sendData, id_user: profile.id };
-        await api.post('orders', sendData);
+  const handleSubmit = useCallback(
+    async sendData => {
+      try {
+        if (editMode) {
+          await api.put(`orders/${id}`, sendData);
+        } else {
+          sendData = { ...sendData, id_user: profile.id };
+          await api.post('orders', sendData);
+        }
+
+        ToastSuccess('Pedido salvo com sucesso');
+        history.push('/list-orders');
+      } catch ({ response }) {
+        const msg =
+          response && response.status === 400
+            ? Object.values(response.data.messages)
+                .map(err => err.message)
+                .join('<br>')
+            : 'Não foi possivel gravar os dados!';
+
+        MessageError(msg);
       }
+    },
+    [editMode, id, profile.id]
+  );
 
-      ToastSuccess('Pedido salvo com sucesso');
-      history.push('/list-orders');
-    } catch ({ response }) {
-      const msg =
-        response && response.status === 400
-          ? Object.values(response.data.messages)
-              .map(err => err.message)
-              .join('<br>')
-          : 'Não foi possivel gravar os dados!';
-
-      MessageError(msg);
-    }
-  }
-
-  const customerPromise = value =>
-    value.length > 2
+  const customerPromise = useCallback(value => {
+    return value.length > 2
       ? api
           .get('/customers', {
             params: {
@@ -271,8 +274,9 @@ export default function FormOrder({ match }) {
           )
           .catch(() => [])
       : [];
+  }, []);
 
-  async function loadStatus() {
+  const loadStatus = useCallback(async () => {
     const response = await api.get(`/status`);
 
     const dataFormatted = response.data.docs.map(item => ({
@@ -281,9 +285,9 @@ export default function FormOrder({ match }) {
     }));
 
     setStatus(dataFormatted);
-  }
+  }, []);
 
-  async function loadData() {
+  const loadData = useCallback(async () => {
     await loadStatus();
     if (!editMode) return;
 
@@ -297,13 +301,11 @@ export default function FormOrder({ match }) {
       },
     };
     setData(dataFormatted);
-  }
+  }, [editMode, id, loadStatus]);
 
   useEffect(() => {
     loadData();
-
-    // eslint-disable-next-line
-  }, []);
+  }, [loadData]);
 
   return (
     <Container>

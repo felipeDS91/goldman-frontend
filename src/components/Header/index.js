@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 
@@ -73,9 +73,9 @@ export default function Header() {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);
 
-  function handleSignOut() {
+  const handleSignOut = useCallback(() => {
     dispatch(signOut());
-  }
+  }, [dispatch]);
 
   return (
     <Container>

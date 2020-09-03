@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import Select from 'react-select/async';
 import propsTypes from 'prop-types';
 
@@ -39,18 +39,21 @@ export default function AsyncSelect({
   const { fieldName, defaultValue, registerField, error } = useField(name);
   const [value, setValue] = useState('');
 
-  function parseSelectValue(selectRef) {
-    if (multiple) {
-      if (!selectRef.props.value) {
-        return [];
+  const parseSelectValue = useCallback(
+    selectRef => {
+      if (multiple) {
+        if (!selectRef.props.value) {
+          return [];
+        }
+        return ref.selectRef.props.value.map(option => option.value.id);
       }
-      return ref.selectRef.props.value.map(option => option.value.id);
-    }
-    if (!selectRef.props.value) {
-      return '';
-    }
-    return selectRef.props.value.id;
-  }
+      if (!selectRef.props.value) {
+        return '';
+      }
+      return selectRef.props.value.id;
+    },
+    [multiple]
+  );
 
   useEffect(() => {
     if (defaultValue && !value) setValue(defaultValue);

@@ -1,6 +1,6 @@
 import { useField } from '@unform/core';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 import { Radio, Wrapper } from './styles';
 
@@ -9,11 +9,11 @@ function RadioGroup({ name, label, options, onChange }) {
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [selected, setSelected] = useState(defaultValue);
 
-  function parseSelectValue(selectRef) {
+  const parseSelectValue = useCallback(selectRef => {
     return selectRef.attributes.props
       ? selectRef.attributes.props.value
       : undefined;
-  }
+  }, []);
 
   useEffect(() => {
     if (ref.current) {

@@ -101,7 +101,6 @@ export default function Routes() {
       />
 
       <Route path="*" exact component={PageNotFound} isPrivate />
-      {/* <Route path="/teste" exact component={PageNotFound} isPrivate /> */}
     </Switch>
   );
 }

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import PropTypes from 'prop-types';
 import { Header, Content } from './styles';
 
 export default function Collapsible({ title, children }) {
   const [opened, setOpen] = useState(true);
-  function togglePanel() {
+
+  const togglePanel = useCallback(() => {
     setOpen(!opened);
-  }
+  }, [opened]);
+
   return (
     <>
       <Header

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { IoIosArrowBack, IoIosCheckmark } from 'react-icons/io';
 import * as Yup from 'yup';
 import { Form, Input } from '~/components';
@@ -28,7 +28,7 @@ const schema = Yup.object().shape({
 });
 
 export default function FormChangePassword() {
-  async function handleSubmit(sendData) {
+  const handleSubmit = useCallback(async sendData => {
     try {
       await api.put('change-password', sendData);
 
@@ -44,7 +44,7 @@ export default function FormChangePassword() {
 
       MessageError(msg);
     }
-  }
+  }, []);
 
   return (
     <Container>

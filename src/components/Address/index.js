@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { IoIosSearch } from 'react-icons/io';
 import * as consultaCep from 'cep-promise';
 
@@ -15,7 +15,7 @@ function Address({ prefix = '' }) {
   const refAddress = useRef(null);
   const refZipCode = useRef(null);
 
-  async function searchCep(value) {
+  const searchCep = useCallback(async value => {
     setLoading(true);
     try {
       const res = await consultaCep(value);
@@ -36,7 +36,7 @@ function Address({ prefix = '' }) {
       });
     }
     setLoading(false);
-  }
+  }, []);
 
   return (
     <>

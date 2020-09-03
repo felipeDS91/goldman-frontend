@@ -19,6 +19,10 @@ function RadioButton({ name, label, value, ...rest }) {
     }
   }, [defaultValue, fieldName, registerField]);
 
+  useEffect(() => {
+    if (defaultValue && !selected) setSelected(defaultValue);
+  }, [defaultValue]); // eslint-disable-line
+
   const props = {
     ref,
     id: value,
@@ -29,10 +33,6 @@ function RadioButton({ name, label, value, ...rest }) {
     defaultChecked: selected,
     ...rest,
   };
-
-  useEffect(() => {
-    if (defaultValue && !selected) setSelected(defaultValue);
-  }, [defaultValue]); // eslint-disable-line
 
   return (
     <Wrapper>

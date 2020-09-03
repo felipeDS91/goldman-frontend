@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Form, Input } from '~/components';
@@ -18,9 +18,12 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.loading);
 
-  function handleSubmit({ email, password }) {
-    dispatch(signInRequest(email, password));
-  }
+  const handleSubmit = useCallback(
+    ({ email, password }) => {
+      dispatch(signInRequest(email, password));
+    },
+    [dispatch]
+  );
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import PropTypes from 'prop-types';
 
@@ -7,25 +7,28 @@ import { SearchInput } from './styles';
 let searchTimeout = null;
 
 export default function Search({ loadData, onChange, value }) {
-  function handleSearch(e) {
-    const search = e.target.value;
-    onChange(e);
+  const handleSearch = useCallback(
+    e => {
+      const search = e.target.value;
+      onChange(e);
 
-    if (searchTimeout) {
-      clearTimeout(searchTimeout);
-    }
-    const timeout = setTimeout(async () => {
-      loadData(search);
-    }, 600);
-    searchTimeout = timeout;
-  }
+      if (searchTimeout) {
+        clearTimeout(searchTimeout);
+      }
+      const timeout = setTimeout(async () => {
+        loadData(search);
+      }, 600);
+      searchTimeout = timeout;
+    },
+    [loadData, onChange]
+  );
 
   return (
     <SearchInput>
       <FiSearch size={16} color="#999" />
       <input
         type="text"
-        placeholder="Buscar cadastro"
+        placeholder="Buscar"
         onChange={handleSearch}
         value={value}
       />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { Scope } from '@unform/core';
 import { Input, CurrencyInput, Textarea, Select, CheckBox } from '~/components';
@@ -12,7 +12,7 @@ function Alliance({ index }) {
   const [colors, setColors] = useState([]);
   const { calculateTotal } = useOrder();
 
-  async function loadFinishings() {
+  const loadFinishings = useCallback(async () => {
     const response = await api.get(`/finishings`);
 
     const dataFormatted = response.data.docs.map(item => ({
@@ -21,9 +21,9 @@ function Alliance({ index }) {
     }));
 
     setFinishings(dataFormatted);
-  }
+  }, []);
 
-  async function loadColors() {
+  const loadColors = useCallback(async () => {
     const response = await api.get(`/colors`);
 
     const dataFormatted = response.data.docs.map(item => ({
@@ -32,13 +32,12 @@ function Alliance({ index }) {
     }));
 
     setColors(dataFormatted);
-  }
+  }, []);
 
   useEffect(() => {
     loadColors();
     loadFinishings();
-    // eslint-disable-next-line
-  }, []);
+  }, [loadColors, loadFinishings]);
 
   return (
     <>

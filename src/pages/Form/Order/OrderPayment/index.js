@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { IoIosAdd, IoIosRemoveCircleOutline } from 'react-icons/io';
 
 import { Scope } from '@unform/core';
@@ -12,16 +12,16 @@ export default function OrderPayment() {
   const { order, setOrder, calculateTotal } = useOrder();
   const [paymentTypes, setPaymentTypes] = useState([]);
 
-  async function loadPaymentType() {
+  const loadPaymentType = useCallback(async () => {
     const response = await api.get(`/payment-type`);
     const dataFormatted = response.data.docs.map(item => ({
       id: item.id,
       title: item.description,
     }));
     setPaymentTypes(dataFormatted);
-  }
+  }, []);
 
-  async function addPayment() {
+  const addPayment = useCallback(() => {
     setOrder({
       ...order,
       order_payments: [
@@ -34,23 +34,24 @@ export default function OrderPayment() {
         },
       ],
     });
-  }
+  }, [order, setOrder]);
 
-  async function delPayment(idPayment) {
-    setOrder({
-      ...order,
-      order_payments: order.order_payments.filter(
-        elem => elem.id !== idPayment
-      ),
-    });
-    calculateTotal();
-  }
+  const delPayment = useCallback(
+    idPayment => {
+      setOrder({
+        ...order,
+        order_payments: order.order_payments.filter(
+          elem => elem.id !== idPayment
+        ),
+      });
+      calculateTotal();
+    },
+    [calculateTotal, order, setOrder]
+  );
 
   useEffect(() => {
     loadPaymentType();
-
-    // eslint-disable-next-line
-  }, []);
+  }, [loadPaymentType]);
 
   return (
     <Collapsible title="FORMA DE PAGAMENTO">

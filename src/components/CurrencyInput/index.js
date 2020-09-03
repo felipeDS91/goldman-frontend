@@ -1,7 +1,14 @@
 import { useField } from '@unform/core';
 import isFunction from 'lodash/isFunction';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState, forwardRef, useRef } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+  forwardRef,
+  useRef,
+  useCallback,
+} from 'react';
 import Currency from 'react-currency-input';
 
 import { Wrapper } from './styles';
@@ -13,9 +20,9 @@ const CurrencyInput = forwardRef(
 
     if (!ref) ref = useRef(null);
 
-    function parseSelectValue(selectRef) {
+    const parseSelectValue = useCallback(selectRef => {
       return selectRef.props.value;
-    }
+    }, []);
 
     useEffect(() => {
       if (ref.current) {
@@ -29,7 +36,7 @@ const CurrencyInput = forwardRef(
           path: 'props.value',
         });
       }
-    }, [fieldName, ref, registerField]);
+    }, [fieldName, parseSelectValue, ref, registerField]);
 
     useEffect(() => {
       if (defaultValue && !curr) setCurr(defaultValue);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { IoIosArrowBack, IoIosCheckmark } from 'react-icons/io';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
@@ -26,41 +26,42 @@ export default function FormCarrier({ match }) {
   const [editMode] = useState(typeof id !== 'undefined');
   const [data, setData] = useState({});
 
-  async function loadData() {
+  const loadData = useCallback(async () => {
     if (!editMode) return;
 
     const response = await api.get(`/carriers/${id}`);
 
     setData(response.data);
-  }
+  }, [editMode, id]);
 
-  async function handleSubmit(sendData) {
-    try {
-      if (editMode) {
-        await api.put(`carriers/${id}`, sendData);
-      } else {
-        await api.post('carriers', sendData);
+  const handleSubmit = useCallback(
+    async sendData => {
+      try {
+        if (editMode) {
+          await api.put(`carriers/${id}`, sendData);
+        } else {
+          await api.post('carriers', sendData);
+        }
+
+        ToastSuccess('Cadastro salvo com sucesso');
+        history.push('/list-carriers');
+      } catch ({ response }) {
+        const msg =
+          response && response.status === 400
+            ? Object.values(response.data.messages)
+                .map(err => err.message)
+                .join('<br>')
+            : 'Não foi possivel gravar os dados!';
+
+        MessageError(msg);
       }
-
-      ToastSuccess('Cadastro salvo com sucesso');
-      history.push('/list-carriers');
-    } catch ({ response }) {
-      const msg =
-        response && response.status === 400
-          ? Object.values(response.data.messages)
-              .map(err => err.message)
-              .join('<br>')
-          : 'Não foi possivel gravar os dados!';
-
-      MessageError(msg);
-    }
-  }
+    },
+    [editMode, id]
+  );
 
   useEffect(() => {
     loadData();
-
-    // eslint-disable-next-line
-  }, []);
+  }, [loadData]);
 
   return (
     <Container>

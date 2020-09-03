@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { IoIosArrowBack, IoIosCheckmark } from 'react-icons/io';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
@@ -47,47 +47,48 @@ export default function FormCustomer({ match }) {
   const [editMode] = useState(typeof id !== 'undefined');
   const [customer, setCustomer] = useState({});
 
-  async function loadData() {
+  const loadData = useCallback(async () => {
     if (!editMode) return;
 
     const response = await api.get(`/customers/${id}`);
 
     setCustomer(response.data);
-  }
+  }, [editMode, id]);
 
-  async function handleSubmit(data) {
-    try {
-      const clearData = {
-        ...data,
-        cpf: unformat(data.cpf),
-        birth_date: data.birth_date,
-      };
+  const handleSubmit = useCallback(
+    async data => {
+      try {
+        const clearData = {
+          ...data,
+          cpf: unformat(data.cpf),
+          birth_date: data.birth_date,
+        };
 
-      if (editMode) {
-        await api.put(`customers/${id}`, clearData);
-      } else {
-        await api.post('customers', clearData);
+        if (editMode) {
+          await api.put(`customers/${id}`, clearData);
+        } else {
+          await api.post('customers', clearData);
+        }
+
+        ToastSuccess('Cadastro salvo com sucesso');
+        history.push('/list-customers');
+      } catch ({ response }) {
+        const msg =
+          response && response.status === 400
+            ? Object.values(response.data.messages)
+                .map(err => err.message)
+                .join('<br>')
+            : 'Não foi possivel gravar os dados!';
+
+        MessageError(msg);
       }
-
-      ToastSuccess('Cadastro salvo com sucesso');
-      history.push('/list-customers');
-    } catch ({ response }) {
-      const msg =
-        response && response.status === 400
-          ? Object.values(response.data.messages)
-              .map(err => err.message)
-              .join('<br>')
-          : 'Não foi possivel gravar os dados!';
-
-      MessageError(msg);
-    }
-  }
+    },
+    [editMode, id]
+  );
 
   useEffect(() => {
     loadData();
-
-    // eslint-disable-next-line
-  }, []);
+  }, [loadData]);
 
   return (
     <Container>

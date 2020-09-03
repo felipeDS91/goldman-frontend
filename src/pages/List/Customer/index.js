@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ export default function ListCustomers() {
     total: 0,
   });
 
-  async function loadData(searchBy, pageNumber = 1) {
+  const loadData = useCallback(async (searchBy, pageNumber = 1) => {
     setLoading(true);
 
     try {
@@ -57,39 +57,45 @@ export default function ListCustomers() {
     }
 
     setLoading(false);
-  }
+  }, []);
 
-  async function deleteRegister({ id, name }) {
-    const confirm = await ShowMessage({
-      title: `Deseja excluir o cliente ${name}?`,
-      text: 'Essa operação não poderá ser revertida!',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#EE4D64',
-      confirmButtonText: 'Sim, excluir!',
-      cancelButtonText: 'Cancelar',
-      focusCancel: true,
-    });
+  const deleteRegister = useCallback(
+    async ({ id, name }) => {
+      const confirm = await ShowMessage({
+        title: `Deseja excluir o cliente ${name}?`,
+        text: 'Essa operação não poderá ser revertida!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#EE4D64',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar',
+        focusCancel: true,
+      });
 
-    if (confirm.value) {
-      try {
-        await api.delete(`customers/${id}`);
-        await loadData();
-        ToastSuccess('Cliente excluído com sucesso!');
-      } catch (error) {
-        MessageError('Não foi possivel excluir o cliente!');
+      if (confirm.value) {
+        try {
+          await api.delete(`customers/${id}`);
+          await loadData();
+          ToastSuccess('Cliente excluído com sucesso!');
+        } catch (error) {
+          MessageError('Não foi possivel excluir o cliente!');
+        }
       }
-    }
-  }
+    },
+    [loadData]
+  );
 
-  function handlePage(page) {
-    loadData(search, page);
-  }
+  const handlePage = useCallback(
+    page => {
+      loadData(search, page);
+    },
+    [loadData, search]
+  );
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [loadData]);
 
   return (
     <Container>
