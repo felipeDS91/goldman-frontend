@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import Select from 'react-select/async';
-import propsTypes from 'prop-types';
+import PropsTypes from 'prop-types';
 
 import { useField } from '@unform/core';
 
@@ -96,10 +96,10 @@ export default function AsyncSelect({
 }
 
 AsyncSelect.propTypes = {
-  name: propsTypes.string.isRequired,
-  loadOptions: propsTypes.func.isRequired,
-  label: propsTypes.string,
-  multiple: propsTypes.bool,
+  name: PropsTypes.string.isRequired,
+  loadOptions: PropsTypes.func.isRequired,
+  label: PropsTypes.string,
+  multiple: PropsTypes.bool,
 };
 
 AsyncSelect.defaultProps = {

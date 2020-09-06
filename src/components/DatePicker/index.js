@@ -5,8 +5,9 @@ import ReactDatePicker, {
   setDefaultLocale,
 } from 'react-datepicker';
 import { useField } from '@unform/core';
-
 import ptBR from 'date-fns/locale/pt-BR';
+import PropTypes from 'prop-types';
+
 import { Wrapper } from './styles';
 
 import CustomDate from './CustomDate';
@@ -65,3 +66,16 @@ export default function DatePicker({
     </Wrapper>
   );
 }
+
+DatePicker.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  onChange: PropTypes.func,
+  readOnly: PropTypes.bool,
+};
+
+DatePicker.defaultProps = {
+  label: null,
+  readOnly: false,
+  onChange: null,
+};

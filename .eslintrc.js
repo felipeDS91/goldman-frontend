@@ -31,7 +31,13 @@ module.exports = {
     camelcase: "off",
     "no-console": ["error", { allow: ["tron"] }],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/label-has-associated-control": [ "error", {
+      "required": {
+        "some": [ "nesting", "id"  ]
+      }
+    }],
   },
   settings: {
     "import/resolver": {

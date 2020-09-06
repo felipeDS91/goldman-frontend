@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 import { MdContentCopy } from 'react-icons/md';
 import {
@@ -156,3 +157,10 @@ export default function OrderDelivery({ formRef }) {
     </Collapsible>
   );
 }
+
+OrderDelivery.propTypes = {
+  formRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.any }),
+  ]).isRequired,
+};

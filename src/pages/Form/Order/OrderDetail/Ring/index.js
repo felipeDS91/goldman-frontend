@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
+import PropTypes from 'prop-types';
 import { Scope } from '@unform/core';
 import { Input, CurrencyInput, Textarea, Select } from '~/components';
 import { Row, Column } from '~/styles/Default';
@@ -7,7 +7,7 @@ import Stone from '../Stone';
 import api from '~/services/api';
 import { useOrder } from '~/context/Order';
 
-function Ring({ index }) {
+function Ring({ indexDetail }) {
   const [colors, setColors] = useState([]);
   const { calculateTotal } = useOrder();
 
@@ -28,7 +28,7 @@ function Ring({ index }) {
 
   return (
     <>
-      <Scope path={`order_details[${index}]`}>
+      <Scope path={`order_details[${indexDetail}]`}>
         <Row>
           <Column width="25%">
             <Input
@@ -51,7 +51,7 @@ function Ring({ index }) {
             <Select name="id_color" label="Tonalidade" options={colors} />
           </Column>
         </Row>
-        <Stone indexDetail={index} />
+        <Stone indexDetail={indexDetail} />
         <Row>
           <Textarea name="observation" label="Observações" rows="4" />
         </Row>
@@ -61,3 +61,7 @@ function Ring({ index }) {
 }
 
 export default Ring;
+
+Ring.propTypes = {
+  indexDetail: PropTypes.number.isRequired,
+};

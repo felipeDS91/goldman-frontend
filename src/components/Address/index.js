@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
+import propsTypes from 'prop-types';
 import { IoIosSearch } from 'react-icons/io';
 import * as consultaCep from 'cep-promise';
 
@@ -7,7 +8,7 @@ import { Loading } from '~/styles/Loading';
 import { Row, Column, Button } from '~/styles/Default';
 import { Input } from '~/components';
 
-function Address({ prefix = '' }) {
+export default function Address({ prefix = '' }) {
   const [loading, setLoading] = useState(false);
   const refState = useRef(null);
   const refCity = useRef(null);
@@ -103,4 +104,10 @@ function Address({ prefix = '' }) {
   );
 }
 
-export default Address;
+Address.propTypes = {
+  prefix: propsTypes.string,
+};
+
+Address.defaultProps = {
+  prefix: '',
+};

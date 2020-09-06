@@ -24,7 +24,7 @@ export default function Table({ children, loading, pagination }) {
 Table.propTypes = {
   children: PropTypes.node.isRequired,
   loading: PropTypes.bool,
-  pagination: PropTypes.object,
+  pagination: PropTypes.element,
 };
 
 Table.defaultProps = {

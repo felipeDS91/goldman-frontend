@@ -1,16 +1,16 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import { Scope } from '@unform/core';
 import { Input, CurrencyInput, Textarea } from '~/components';
 import { Row, Column } from '~/styles/Default';
 import { useOrder } from '~/context/Order';
 
-function Others({ index }) {
+function Others({ indexDetail }) {
   const { calculateTotal } = useOrder();
 
   return (
     <>
-      <Scope path={`order_details[${index}]`}>
+      <Scope path={`order_details[${indexDetail}]`}>
         <Row>
           <Column width="100%">
             <Input
@@ -39,3 +39,7 @@ function Others({ index }) {
 }
 
 export default Others;
+
+Others.propTypes = {
+  indexDetail: PropTypes.number.isRequired,
+};

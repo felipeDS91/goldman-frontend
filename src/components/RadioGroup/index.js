@@ -29,7 +29,7 @@ function RadioGroup({ name, label, options, onChange }) {
   useEffect(() => {
     if (defaultValue && !selected) {
       if (defaultValue) setSelected(defaultValue);
-      onChange && onChange(defaultValue);
+      if (onChange) onChange(defaultValue);
     }
   }, [defaultValue]); // eslint-disable-line
 
@@ -39,7 +39,7 @@ function RadioGroup({ name, label, options, onChange }) {
         <legend>{label}</legend>
         <div
           onChange={e => {
-            onChange && onChange(e.target.value);
+            if (onChange) onChange(e.target.value);
             setSelected(e.target.value);
           }}
         >

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { useField } from '@unform/core';
 import { Wrapper } from './styles';
@@ -93,3 +94,20 @@ export default function ReactSelect({
     </Wrapper>
   );
 }
+
+ReactSelect.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      description: PropTypes.string,
+    })
+  ).isRequired,
+  multiple: PropTypes.bool,
+};
+
+ReactSelect.defaultProps = {
+  label: null,
+  multiple: false,
+};

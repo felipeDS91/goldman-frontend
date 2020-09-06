@@ -88,9 +88,11 @@ export default function OrderDetail() {
                   </DelDetail>
                 </Column>
               </Row>
-              {detail.item_type === 'outros' && <Others index={index} />}
-              {detail.item_type === 'anel' && <Ring index={index} />}
-              {detail.item_type === 'alianca' && <Alliance index={index} />}
+              {detail.item_type === 'outros' && <Others indexDetail={index} />}
+              {detail.item_type === 'anel' && <Ring indexDetail={index} />}
+              {detail.item_type === 'alianca' && (
+                <Alliance indexDetail={index} />
+              )}
             </Card>
           );
         })}

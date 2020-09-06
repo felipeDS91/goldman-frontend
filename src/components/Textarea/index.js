@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import Proptypes from 'prop-types';
 import { useField } from '@unform/core';
 import { Wrapper } from './styles';
 
@@ -31,3 +32,12 @@ export default function Textarea({ name, label, ...props }) {
     </Wrapper>
   );
 }
+
+Textarea.propTypes = {
+  name: Proptypes.string.isRequired,
+  label: Proptypes.string,
+};
+
+Textarea.defaultProps = {
+  label: null,
+};

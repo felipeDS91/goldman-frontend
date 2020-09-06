@@ -143,7 +143,3 @@ export default function FormCompany() {
     </Container>
   );
 }
-
-FormCompany.propTypes = {};
-
-FormCompany.defaultProps = {};

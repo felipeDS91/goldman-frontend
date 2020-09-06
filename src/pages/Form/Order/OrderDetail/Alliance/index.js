@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
+import PropTypes from 'prop-types';
 import { Scope } from '@unform/core';
 import { Input, CurrencyInput, Textarea, Select, CheckBox } from '~/components';
 import { Row, Column } from '~/styles/Default';
@@ -7,7 +7,7 @@ import api from '~/services/api';
 import Stone from '../Stone';
 import { useOrder } from '~/context/Order';
 
-function Alliance({ index }) {
+function Alliance({ indexDetail }) {
   const [finishings, setFinishings] = useState([]);
   const [colors, setColors] = useState([]);
   const { calculateTotal } = useOrder();
@@ -41,7 +41,7 @@ function Alliance({ index }) {
 
   return (
     <>
-      <Scope path={`order_details[${index}]`}>
+      <Scope path={`order_details[${indexDetail}]`}>
         <Row>
           <Column width="30%">
             <Input type="number" step="any" name="width" label="Largura" />
@@ -98,7 +98,7 @@ function Alliance({ index }) {
             <Select name="id_color" label="Tonalidade" options={colors} />
           </Column>
         </Row>
-        <Stone indexDetail={index} />
+        <Stone indexDetail={indexDetail} />
         <Row>
           <Textarea name="observation" label="Observações" rows="4" />
         </Row>
@@ -108,3 +108,7 @@ function Alliance({ index }) {
 }
 
 export default Alliance;
+
+Alliance.propTypes = {
+  indexDetail: PropTypes.number.isRequired,
+};

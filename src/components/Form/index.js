@@ -1,4 +1,5 @@
 import React, { forwardRef, useRef, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
 import { ToastError } from '~/components/Message';
@@ -41,3 +42,12 @@ const Form = forwardRef(({ children, schema, onSubmit, ...props }, ref) => {
 });
 
 export default Form;
+
+Form.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]).isRequired,
+  schema: PropTypes.instanceOf(Yup.object).isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
