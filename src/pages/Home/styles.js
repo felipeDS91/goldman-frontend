@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
+import { colors } from '~/styles';
 
 export const Container = styled.div`
   max-width: 800px;
@@ -7,7 +8,7 @@ export const Container = styled.div`
 
   strong {
     font-size: 20px;
-    color: #444444;
+    color: ${colors.label};
   }
 `;
 
@@ -17,7 +18,7 @@ export const FormWrapper = styled.div`
   flex-direction: column;
   margin-top: 14px;
   padding: 22px;
-  background: #ffffff;
+  background: ${colors.background};
   border-radius: 4px;
 `;
 
@@ -27,7 +28,7 @@ export const User = styled.div`
   align-items: baseline;
   font-size: 18px;
   strong {
-    color: #de3b3b;
+    color: ${colors.primary};
     padding-left: 4px;
   }
 `;

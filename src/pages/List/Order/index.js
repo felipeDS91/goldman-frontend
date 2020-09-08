@@ -17,6 +17,7 @@ import {
   PrintButton,
   RemoveButton,
 } from '~/styles/Default';
+import { colors } from '~/styles';
 import { Container } from './styles';
 
 export default function ListOrders() {
@@ -63,7 +64,7 @@ export default function ListOrders() {
   }, []);
 
   const deleteRegister = useCallback(
-    async ({ id, description }) => {
+    async ({ id }) => {
       const confirm = await ShowMessage({
         title: `Deseja excluir o pedido nº ${id}?`,
         text: 'Essa operação não poderá ser revertida!',
@@ -152,7 +153,7 @@ export default function ListOrders() {
                     title="Imprimir pedido"
                     background="#EFEFEF"
                   >
-                    <IoMdPrint size={20} color="#ee4d64" />
+                    <IoMdPrint size={20} color={colors.primary} />
                   </PrintButton>
                 </td>
                 <td align="center">

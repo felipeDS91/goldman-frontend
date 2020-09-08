@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '~/styles';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const Wrapper = styled.div`
 
   label {
     font-size: 14px;
-    color: #444444;
+    color: ${colors.label};
     text-align: left;
     margin-bottom: 4px;
     font-weight: bold;
@@ -15,17 +16,17 @@ export const Wrapper = styled.div`
   }
 
   textarea {
-    border: 1px solid #d6d7da;
+    border: 1px solid ${colors.border};
     border-radius: 4px;
     padding: 14px;
 
     &::placeholder {
-      color: #c4c4c4;
+      color: ${colors.placeholder};
     }
   }
 
   span {
-    color: #f66f91;
+    color: ${colors.error};
     align-self: flex-start;
     margin-top: 3px;
     font-weight: bold;

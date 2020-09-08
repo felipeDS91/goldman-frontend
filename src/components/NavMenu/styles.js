@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../styles';
 
 export const Menu = styled.nav`
   .nav-item {
@@ -9,7 +10,7 @@ export const Menu = styled.nav`
     height: 17px;
     font-weight: bold;
     opacity: 0.8;
-    color: #999;
+    color: ${colors.darkerBackground};
     z-index: 1;
 
       &:hover {
@@ -19,7 +20,7 @@ export const Menu = styled.nav`
     }
 
     a.active {
-      color: #444;
+      color: ${colors.label};
     }
 
     div {
@@ -32,7 +33,6 @@ export const Menu = styled.nav`
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    color: red;
   }
 
   svg {
@@ -42,7 +42,7 @@ export const Menu = styled.nav`
 
 export const DropdownMenu = styled.div`
   .dropdown {
-    background: #ffffff;
+    background: ${colors.background};
     position: absolute;
     opacity: 0;
     visibility: hidden;
@@ -53,8 +53,8 @@ export const DropdownMenu = styled.div`
     width: 200px;
     text-align: left;
     top: 18px;
-    border: 1px solid #ededee;
-    box-shadow: 0px 1px 1px 1px #ededee;
+    border: 1px solid ${colors.secondary};
+    box-shadow: 0px 1px 1px 1px ${colors.secondary};
   }
 
   .dropdown__item {

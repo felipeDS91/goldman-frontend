@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../styles';
 
 export const Wrapper = styled.div`
   display: flex !important;
@@ -7,7 +8,7 @@ export const Wrapper = styled.div`
 
   label {
     font-size: 14px;
-    color: #444444;
+    color: ${colors.label};
     text-align: center;
     margin-bottom: 4px;
     font-weight: bold;
@@ -15,7 +16,7 @@ export const Wrapper = styled.div`
   }
 
   span {
-    color: #f66f91;
+    color: ${colors.error};
     align-self: flex-start;
     margin-top: 3px;
     font-weight: bold;

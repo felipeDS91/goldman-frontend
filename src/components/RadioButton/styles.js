@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '~/styles';
 
 export const Wrapper = styled.div`
   label {
@@ -6,18 +7,14 @@ export const Wrapper = styled.div`
   }
 
   span {
-    color: #f66f91;
+    color: ${colors.error};
     align-self: flex-start;
     margin-top: 3px;
     font-weight: bold;
   }
 `;
 
-export const Radio = styled.input.attrs(props => ({
-  // we can define static props
-  // or we can define dynamic ones
-  // size: props.size || '0.1em',
-}))`
+export const Radio = styled.input`
   height: 12px !important;
   margin-right: 4px;
 `;

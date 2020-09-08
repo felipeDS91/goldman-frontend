@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '~/styles';
 
 export const Container = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ export const Header = styled.div`
 export const Description = styled.div`
   display: flex;
   flex-direction: column;
-  color: #312e38;
+  color: ${colors.label};
   font-weight: bold;
   font-size: 18px;
   padding: 0px 14px 14px 0;

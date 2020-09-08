@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
+import { colors } from '~/styles';
 
 export const Wrapper = styled.div`
   height: 100%;
-  /* background: #eebe52; */
-  /* background: #ee4d64; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +13,7 @@ export const Content = styled.div`
   width: 100%;
   max-width: 370px;
   text-align: center;
-  background: #fff;
+  background: ${colors.background};
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.4) 0 0 10px;
 
@@ -48,7 +47,7 @@ export const Content = styled.div`
     }
 
     span {
-      color: #f66f91;
+      color: ${colors.error};
       align-self: flex-start;
       margin: 0 0 10px;
       font-weight: bold;
@@ -59,7 +58,7 @@ export const Content = styled.div`
       height: 44px;
       background: #eebe52;
       font-weight: bold;
-      color: #fff;
+      color: ${colors.buttonFont};
       border: 20px;
       border-radius: 4px;
       font-size: 16px;

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
+import { colors } from '../../styles';
 
 export const PaginationContainer = styled.div`
   display: flex;
@@ -15,9 +17,10 @@ export const Button = styled.button`
   align-items: center;
   border: 0;
   border-radius: 4px;
-  background: ${props => (props.disabled ? '#f66f91' : '#ee4d64')};
+  background: ${props =>
+    props.disabled ? lighten(0.08, colors.primary) : colors.primary};
   font-size: 12px;
-  color: #fff;
+  color: ${colors.buttonFont};
   padding: 6px;
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
 `;

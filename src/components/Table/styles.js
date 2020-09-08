@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { colors } from '~/styles';
 
 export const Wrapper = styled.div`
-  background: #fff;
+  background: ${colors.background};
   border-radius: 4px;
   padding: 25px;
 
@@ -11,7 +12,7 @@ export const Wrapper = styled.div`
 
   thead {
     font-size: 16px;
-    color: #444;
+    color: ${colors.label};
     text-align: left;
   }
 

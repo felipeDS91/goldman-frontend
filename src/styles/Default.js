@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 import { Link } from 'react-router-dom';
+import { colors } from '~/styles';
 
 export const Row = styled.div`
   display: flex;
@@ -32,7 +33,7 @@ export const Card = styled.div`
   box-shadow: rgba(0, 0, 0, 0.3) 0 0 10px;
 `;
 
-export const AddButton = styled.button.attrs(props => ({
+export const AddButton = styled.button.attrs(_ => ({
   type: 'button',
 }))`
   display: flex;
@@ -45,7 +46,7 @@ export const AddButton = styled.button.attrs(props => ({
   min-width: 110px;
   font-size: 14px;
   font-weight: bold;
-  color: #fff;
+  color: ${colors.buttonFont};
   background: #4ec162;
   line-height: 36px;
   justify-content: center;
@@ -71,8 +72,8 @@ export const Options = styled.div`
     align-items: center;
     height: 36px;
     width: 142px;
-    background: #ee4d64;
-    color: #fff;
+    background: ${colors.primary};
+    color: ${colors.buttonFont};
     border: 20px;
     border-radius: 4px;
     font-size: 14px;
@@ -82,7 +83,7 @@ export const Options = styled.div`
     padding: 0 10px 0 10px;
 
     &:hover {
-      background: ${darken(0.03, '#EE4D64')};
+      background: ${darken(0.03, colors.primary)};
     }
   }
 `;
@@ -98,7 +99,7 @@ export const PageHeader = styled.div`
 `;
 
 export const TitlePage = styled.strong`
-  color: #444;
+  color: ${colors.label};
   font-size: 24px;
 `;
 
@@ -111,8 +112,8 @@ export const SaveButton = styled.button`
   width: 110px;
   font-size: 14px;
   font-weight: bold;
-  color: #fff;
-  background: #ee4d64;
+  color: ${colors.buttonFont};
+  background: ${colors.primary};
   text-align: right;
 
   svg {
@@ -120,11 +121,11 @@ export const SaveButton = styled.button`
   }
 
   &:hover {
-    background: ${darken(0.08, '#ee4d64')};
+    background: ${darken(0.08, colors.primary)};
   }
 `;
 
-export const PrintButton = styled.button.attrs(props => ({
+export const PrintButton = styled.button.attrs(_ => ({
   type: 'button',
 }))`
   display: flex;
@@ -135,7 +136,7 @@ export const PrintButton = styled.button.attrs(props => ({
   padding: 10px;
   font-size: 14px;
   font-weight: bold;
-  color: #fff;
+  color: ${colors.buttonFont};
   background: ${props => props.background};
 
   svg {
@@ -147,7 +148,7 @@ export const PrintButton = styled.button.attrs(props => ({
   }
 `;
 
-export const BackButton = styled.button.attrs(props => ({
+export const BackButton = styled.button.attrs(_ => ({
   type: 'button',
 }))`
   display: flex;
@@ -158,7 +159,7 @@ export const BackButton = styled.button.attrs(props => ({
   width: 110px;
   font-size: 14px;
   font-weight: bold;
-  color: #fff;
+  color: ${colors.buttonFont};
   background: #cccccc;
   text-align: right;
   margin-right: 14px;
@@ -172,7 +173,7 @@ export const BackButton = styled.button.attrs(props => ({
   }
 `;
 
-export const Button = styled.button.attrs(props => ({
+export const Button = styled.button.attrs(_ => ({
   type: 'button',
 }))`
   display: flex;
@@ -187,7 +188,7 @@ export const Button = styled.button.attrs(props => ({
   width: 36px;
   font-size: 14px;
   font-weight: bold;
-  color: #fff;
+  color: ${colors.buttonFont};
   background: #cccccc;
   text-align: right;
   margin-right: 14px;

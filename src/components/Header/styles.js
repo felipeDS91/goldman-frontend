@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { colors } from '../../styles';
 
 export const Container = styled.div`
-  background: #fff;
+  background: ${colors.background};
   padding: 0 30px;
 
   @media print {
@@ -25,7 +26,7 @@ export const Content = styled.div`
     img {
       margin-right: 20px;
       padding-right: 20px;
-      border-right: 1px solid #dddddd;
+      border-right: 1px solid ${colors.border};
     }
 
     a {
@@ -40,7 +41,7 @@ export const Content = styled.div`
     }
 
     a.active {
-      color: #444;
+      color: ${colors.label};
     }
   }
 
@@ -54,7 +55,7 @@ export const Profile = styled.div`
   display: flex;
   margin-left: 20px;
   padding-left: 20px;
-  border-left: 1px solid #eee;
+  border-left: 1px solid ${colors.border};
 
   div {
     text-align: right;
@@ -65,13 +66,6 @@ export const Profile = styled.div`
       color: #666666;
     }
 
-    a {
-      display: block;
-      margin-top: 2px;
-      font-size: 14px;
-      color: #de3b3b;
-    }
-
     button {
       float: right;
       border: 0;
@@ -80,7 +74,7 @@ export const Profile = styled.div`
       margin-top: 2px;
       align-self: right;
       font-size: 14px;
-      color: #de3b3b;
+      color: ${colors.primary};
     }
   }
 `;

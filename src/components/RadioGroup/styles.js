@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '~/styles';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -13,13 +14,13 @@ export const Wrapper = styled.div`
   fieldset {
     padding: 8px;
     width: 100%;
-    border: 1px solid #d6d7da;
+    border: 1px solid ${colors.border};
     border-radius: 4px;
   }
 
   label {
     font-size: 14px;
-    color: #444444;
+    color: ${colors.label};
     text-align: left;
     font-weight: bold;
 
@@ -29,7 +30,7 @@ export const Wrapper = styled.div`
   }
 
   span {
-    color: #f66f91;
+    color: ${colors.error};
     align-self: flex-start;
     margin-top: 3px;
     font-weight: bold;
@@ -39,15 +40,12 @@ export const Wrapper = styled.div`
     font-size: 14px;
     font-weight: bold;
     padding: 4px;
-    color: #444444;
+    color: ${colors.label};
   }
 `;
 
-export const Radio = styled.input.attrs(props => ({
-  // we can define static props
-  // or we can define dynamic ones
+export const Radio = styled.input.attrs(_ => ({
   type: 'radio',
-  // size: props.size || '0.1em',
 }))`
   height: 12px !important;
   margin-right: 4px;
