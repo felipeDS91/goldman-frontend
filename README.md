@@ -1,68 +1,139 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">
+  <img
+    alt="Logo"
+    src="https://res.cloudinary.com/dixtjpk8s/image/upload/v1599651606/Goldman/logo_g6tawl.png" width="300px"
+  />
+</h1>
 
-## Available Scripts
+<h3 align="center">
+  ReactJS Application for Goldman project
+</h3>
 
-In the project directory, you can run:
+<p align="center">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/felipeDS91/goldman-frontend?color=%23fbc131">
+  
+  <a href="https://www.linkedin.com/in/felipe-douglas-dev/" target="_blank" rel="noopener noreferrer">
+    <img alt="Made by" src="https://img.shields.io/badge/made%20by-felipe%20douglas-%23fbc131">
+  </a>
 
-### `yarn start`
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/felipeDS91/goldman-frontend?color=%23fbc131">
+  
+  <a href="https://github.com/FelipeDS91/goldman-frontend/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/FelipeDS91/goldman-frontend?color=%23fbc131">
+  </a>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <a href="https://github.com/FelipeDS91/goldman-frontend/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/FelipeDS91/goldman-frontend?color=%23fbc131">
+  </a>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  <img alt="GitHub" src="https://img.shields.io/github/license/FelipeDS91/goldman-frontend?color=%23fbc131">
+</p>
 
-### `yarn test`
+<p align="center">
+  <a href="#-about-the-project">About the project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-how-to-contribute">How to contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-license">License</a>
+</p>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+</br>
 
-### `yarn build`
+<p align="center">
+  <img alt="Layout" src="https://res.cloudinary.com/dixtjpk8s/image/upload/v1599663955/Goldman/demo-1_gdsrpg.gif">
+</p>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 👨🏻‍💻 About the project
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This is a ReactJS web client that will be used by the company manager!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+With this web client, it's possible to control the entire flow of order's company, from creating customers register to finalizing orders.
 
-### `yarn eject`
+### Features
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Manage customers
+- Manage orders
+- Profit visualization
+- Calculate the final price of orders
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To see the **api**, click here: [Goldman Rest API](https://github.com/FelipeDS91/goldman-backend)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🚀 Technologies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Technologies that I used to develop this web client
 
-## Learn More
+- [ReactJS](https://reactjs.org/)
+- [React Router DOM](https://reacttraining.com/react-router/)
+- [Redux](https://redux.js.org/introduction/getting-started)
+- [Redux-Saga](https://redux-saga.js.org/docs/introduction/BeginnerTutorial.html)
+- [Prop-Types](https://www.npmjs.com/package/prop-types)
+- [React Icons](https://react-icons.netlify.com/#/)
+- [UnForm](https://unform.dev/) [💜](https://rocketseat.com.br/)
+- [Yup](https://github.com/jquense/yup)
+- [Styled Components](https://styled-components.com/)
+- [Polished](https://github.com/styled-components/polished)
+- [Axios](https://github.com/axios/axios)
+- [Eslint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [EditorConfig](https://editorconfig.org/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 💻 Getting started
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Requirements
 
-### Code Splitting
+- Have this application's [API](https://github.com/felipeDS91/goldman-backend) running
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+**Clone the project and access the folder**
 
-### Analyzing the Bundle Size
+```bash
+$ git clone https://github.com/felipeDS91/goldman-frontend.git && cd goldman-frontend
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+**Follow the steps below**
 
-### Making a Progressive Web App
+```bash
+# Install the dependencies
+$ yarn
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+# Copy and rename file '.env.example' to '.env' and fill out the constant "REACT_APP_API_URL" with your IP address
 
-### Advanced Configuration
+# Start the client
+$ yarn start
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## 🤔 How to contribute
 
-### Deployment
+**Make a fork of this repository**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+```bash
+# Fork using GitHub official command line
+# If you don't have the GitHub CLI, use the web site to do that.
 
-### `yarn build` fails to minify
+$ gh repo fork felipeDS91/goldman-frontend
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**Follow the steps below**
+
+```bash
+# Clone your fork
+$ git clone your-fork-url && cd goldman-frontend
+
+# Create a branch with your feature
+$ git checkout -b my-feature
+
+# Make the commit with your changes
+$ git commit -m 'feat: My new feature'
+
+# Send the code to your remote branch
+$ git push origin my-feature
+```
+
+After your pull request is merged, you can delete your branch
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Made with 💜&nbsp; by Felipe Douglas 👋 [See my linkedin](https://www.linkedin.com/in/felipe-douglas-dev/)
