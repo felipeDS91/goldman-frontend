@@ -79,7 +79,6 @@ export const Options = styled.div`
     font-size: 14px;
     font-weight: bold;
     transition: backgroud 0.2s;
-    border: 20px;
     padding: 0 10px 0 10px;
 
     &:hover {

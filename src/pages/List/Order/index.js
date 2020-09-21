@@ -4,6 +4,7 @@ import { IoMdPrint } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import history from '~/services/history';
 
+import Filters from './Filters';
 import { formatPrice, formatDateTime } from '~/util/format';
 import { Pagination, Search, Table } from '~/components';
 import { ToastSuccess, MessageError, ShowMessage } from '~/components/Message';
@@ -22,6 +23,8 @@ import { Container } from './styles';
 
 export default function ListOrders() {
   const [loading, setLoading] = useState(true);
+  const [filterIsOpen, setFilterIsOpen] = useState(false);
+  const [filter, setFilter] = useState();
   const [data, setData] = useState([]);
   const [search, setSearch] = useState('');
   const [pagination, setPagination] = useState({
@@ -30,38 +33,56 @@ export default function ListOrders() {
     total: 0,
   });
 
-  const loadData = useCallback(async (searchBy, pageNumber = 1) => {
-    setLoading(true);
-
-    try {
-      const result = await api.get('/orders', {
-        params: {
-          page: pageNumber,
-          q: searchBy,
-        },
-      });
-
-      const { docs, ...info } = result.data;
-
-      const dataFormatted = docs.map(item => ({
-        ...item,
-        total: formatPrice(item.total),
-        createdAt: formatDateTime(item.createdAt),
-      }));
-
-      setData(dataFormatted);
-      setPagination(info);
-    } catch (error) {
-      setData([]);
-      setPagination({
-        page: 1,
-        pages: 1,
-        total: 0,
-      });
-    }
-
-    setLoading(false);
+  const handleClickFilter = useCallback(() => {
+    setFilterIsOpen(true);
   }, []);
+
+  const hasFilter = useCallback(() => {
+    return filter
+      ? Object.values(filter).filter(item =>
+          Array.isArray(item)
+            ? item.length > 0
+            : typeof item !== 'undefined' && item !== ''
+        ).length > 0
+      : false;
+  }, [filter]);
+
+  const loadData = useCallback(
+    async (searchBy, pageNumber = 1) => {
+      setLoading(true);
+
+      try {
+        const result = await api.get('/orders', {
+          params: {
+            filter,
+            page: pageNumber,
+            q: searchBy,
+          },
+        });
+
+        const { docs, ...info } = result.data;
+
+        const dataFormatted = docs.map(item => ({
+          ...item,
+          total: formatPrice(item.total),
+          createdAt: formatDateTime(item.createdAt),
+        }));
+
+        setData(dataFormatted);
+        setPagination(info);
+      } catch (error) {
+        setData([]);
+        setPagination({
+          page: 1,
+          pages: 1,
+          total: 0,
+        });
+      }
+
+      setLoading(false);
+    },
+    [filter]
+  );
 
   const deleteRegister = useCallback(
     async ({ id }) => {
@@ -111,9 +132,11 @@ export default function ListOrders() {
             CADASTRAR
           </Link>
           <Search
+            hasFilter={hasFilter()}
             loadData={loadData}
             value={search}
             onChange={e => setSearch(e.target.value)}
+            onClickFilter={handleClickFilter}
           />
         </Options>
       </PageHeader>
@@ -173,6 +196,12 @@ export default function ListOrders() {
           )}
         </tbody>
       </Table>
+
+      <Filters
+        opened={filterIsOpen}
+        setOpened={setFilterIsOpen}
+        onApplyFilter={value => setFilter(value)}
+      />
     </Container>
   );
 }

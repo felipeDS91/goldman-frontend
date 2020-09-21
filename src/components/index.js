@@ -16,3 +16,4 @@ export { default as Select } from './Select';
 export { default as Table } from './Table';
 export { default as Textarea } from './Textarea';
 export { default as Address } from './Address';
+export { default as Modal } from './Modal';

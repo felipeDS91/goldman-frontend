@@ -1,12 +1,20 @@
 import React, { useCallback } from 'react';
-import { FiSearch } from 'react-icons/fi';
+import { FiFilter } from 'react-icons/fi';
 import PropTypes from 'prop-types';
+import { colors } from '~/styles';
 
-import { SearchInput } from './styles';
+import { Wrapper, SearchButton } from './styles';
 
 let searchTimeout = null;
 
-export default function Search({ loadData, onChange, value }) {
+export default function Search({
+  loadData,
+  onChange,
+  value,
+  hasFilter,
+  onChangeFilter,
+  onClickFilter,
+}) {
   const handleSearch = useCallback(
     e => {
       const search = e.target.value;
@@ -24,15 +32,25 @@ export default function Search({ loadData, onChange, value }) {
   );
 
   return (
-    <SearchInput>
-      <FiSearch size={16} color="#999" />
+    <Wrapper>
+      <SearchButton
+        title="Clique aqui definir um filtro"
+        background="#dedede"
+        onClick={() => onClickFilter && onClickFilter()}
+      >
+        <FiFilter
+          size={16}
+          color={hasFilter ? colors.label : colors.background}
+        />
+      </SearchButton>
+
       <input
         type="text"
         placeholder="Buscar"
         onChange={handleSearch}
         value={value}
       />
-    </SearchInput>
+    </Wrapper>
   );
 }
 

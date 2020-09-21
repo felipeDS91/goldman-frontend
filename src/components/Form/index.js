@@ -10,6 +10,11 @@ const Form = forwardRef(({ children, schema, onSubmit, ...props }, ref) => {
 
   const handleSubmit = useCallback(
     async data => {
+      if (!schema) {
+        onSubmit(data);
+        return;
+      }
+
       try {
         // Remove all previous errors
         ref.current.setErrors({});
@@ -48,6 +53,10 @@ Form.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
   ]).isRequired,
-  schema: PropTypes.instanceOf(Yup.object).isRequired,
+  schema: PropTypes.instanceOf(Yup.object),
   onSubmit: PropTypes.func.isRequired,
+};
+
+Form.defaultProps = {
+  schema: null,
 };
