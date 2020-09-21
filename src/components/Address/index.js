@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import propsTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { IoIosSearch } from 'react-icons/io';
 import * as consultaCep from 'cep-promise';
 
@@ -105,7 +105,7 @@ export default function Address({ prefix = '' }) {
 }
 
 Address.propTypes = {
-  prefix: propsTypes.string,
+  prefix: PropTypes.string,
 };
 
 Address.defaultProps = {

@@ -12,7 +12,6 @@ export default function Search({
   onChange,
   value,
   hasFilter,
-  onChangeFilter,
   onClickFilter,
 }) {
   const handleSearch = useCallback(
@@ -58,4 +57,11 @@ Search.propTypes = {
   value: PropTypes.string.isRequired,
   loadData: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  hasFilter: PropTypes.bool,
+  onClickFilter: PropTypes.func,
+};
+
+Search.defaultProps = {
+  hasFilter: false,
+  onClickFilter: () => {},
 };

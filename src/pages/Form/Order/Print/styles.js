@@ -20,8 +20,6 @@ export const Card = styled.div`
   padding: 14px;
   border-radius: 4px;
   border: 1px solid #dddddd;
-  /* background: #f2f2f2; */
-  /* box-shadow: rgba(0, 0, 0, 0.3) 0 0 10px; */
 `;
 
 export const Content = styled.div`
@@ -58,6 +56,7 @@ export const Row = styled.div`
   align-content: space-between;
   width: 100%;
   margin-top: 5px;
+  white-space: pre-wrap;
 `;
 
 export const HeaderRow = styled.div`
