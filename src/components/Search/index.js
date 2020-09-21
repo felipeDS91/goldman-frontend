@@ -34,7 +34,7 @@ export default function Search({
   return (
     <Wrapper>
       <SearchButton
-        title="Clique aqui definir um filtro"
+        title="Clique aqui para definir um filtro"
         background="#dedede"
         onClick={() => onClickFilter && onClickFilter()}
       >
