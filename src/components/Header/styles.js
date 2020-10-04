@@ -73,7 +73,7 @@ export const Profile = styled.div`
       display: block;
       margin-top: 2px;
       align-self: right;
-      font-size: 14px;
+      font-size: 12px;
       color: ${colors.primary};
     }
   }

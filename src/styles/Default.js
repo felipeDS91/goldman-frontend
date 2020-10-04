@@ -147,6 +147,28 @@ export const PrintButton = styled.button.attrs(_ => ({
   }
 `;
 
+export const ViewButton = styled.button`
+  display: flex;
+  align-items: center;
+  border: 0;
+  border-radius: 4px;
+  height: 36px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: ${colors.buttonFont};
+  background: ${props => props.background};
+  margin-right: 14px;
+
+  svg {
+    margin-right: ${props => (props.children.length > 1 ? '10px' : '0')};
+  }
+
+  &:hover {
+    background: ${props => props.background && darken(0.08, props.background)};
+  }
+`;
+
 export const BackButton = styled.button.attrs(_ => ({
   type: 'button',
 }))`

@@ -29,6 +29,7 @@ import ListFreightTypes from '~/pages/List/FreightType';
 import FormFreightType from '~/pages/Form/FreightType';
 import FormCompany from '~/pages/Form/Company';
 import PrintOrder from '~/pages/Form/Order/Print';
+import ReportOrder from '~/pages/Report/Order';
 
 export default function Routes() {
   return (
@@ -99,6 +100,8 @@ export default function Routes() {
         component={FormChangePassword}
         isPrivate
       />
+
+      <Route path="/report-order" exact component={ReportOrder} isPrivate />
 
       <Route path="*" exact component={PageNotFound} isPrivate />
     </Switch>

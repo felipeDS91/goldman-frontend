@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 
 import {
+  IoIosStats,
   IoIosCash,
   IoMdStats,
   IoMdPerson,
@@ -17,11 +18,10 @@ import logo from '~/assets/logo-2.svg';
 import { Container, Content, Profile } from './styles';
 import NavMenu from '~/components/NavMenu';
 
-const menuRegister = [
+const registrationMenu = [
   {
     Icon: IoIosCash,
     title: 'Tipos de pagamento',
-    altText: 'your-courses-icon',
     classNames: 'dropdown__item',
     href: '/list-payment-type',
   },
@@ -69,6 +69,15 @@ const menuRegister = [
   },
 ];
 
+const reportMenu = [
+  {
+    Icon: IoIosStats,
+    title: 'Relação de pedidos',
+    classNames: 'dropdown__item',
+    href: '/report-order',
+  },
+];
+
 export default function Header() {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);
@@ -86,9 +95,9 @@ export default function Header() {
           </NavLink>
           <NavLink to="/list-customers">CLIENTES</NavLink>
           <NavLink to="/list-orders">PEDIDOS</NavLink>
-          <NavMenu menu={menuRegister}>CADASTROS</NavMenu>
+          <NavMenu menu={registrationMenu}>CADASTROS</NavMenu>
           <NavLink to="/company">CONFIGURAÇÕES</NavLink>
-          <NavLink to="#">RELATÓRIOS</NavLink>
+          <NavMenu menu={reportMenu}>RELATÓRIOS</NavMenu>
         </nav>
 
         <aside>
