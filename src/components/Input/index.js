@@ -1,4 +1,11 @@
-import React, { useEffect, useRef, forwardRef, useMemo } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  forwardRef,
+  useMemo,
+  useState,
+  useCallback,
+} from 'react';
 import { useField } from '@unform/core';
 import PropTypes from 'prop-types';
 import InputMask from 'react-input-mask';
@@ -7,6 +14,7 @@ import { Wrapper } from './styles';
 const Input = forwardRef(({ name, label, mask, ...rest }, ref) => {
   if (!ref) ref = useRef(null);
   const { fieldName, registerField, defaultValue = '', error } = useField(name);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     if (ref.current) {
@@ -29,6 +37,14 @@ const Input = forwardRef(({ name, label, mask, ...rest }, ref) => {
       ref.current.setInputValue(defaultValue);
   }, [defaultValue]); // eslint-disable-line
 
+  const handleFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleBlur = useCallback(() => {
+    setIsFocused(false);
+  }, []);
+
   const props = {
     ...rest,
     ref,
@@ -37,6 +53,8 @@ const Input = forwardRef(({ name, label, mask, ...rest }, ref) => {
     'aria-label': fieldName,
     defaultValue,
     mask,
+    onFocus: handleFocus,
+    onBlur: handleBlur,
   };
 
   if (mask) props.maskChar = ' ';
@@ -47,7 +65,7 @@ const Input = forwardRef(({ name, label, mask, ...rest }, ref) => {
   }, [mask, props]);
 
   return (
-    <Wrapper>
+    <Wrapper isFocused={isFocused}>
       {label && <label htmlFor={fieldName}>{label}</label>}
       {renderInput}
       {error && <span>{error}</span>}

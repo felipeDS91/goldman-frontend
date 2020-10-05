@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { colors } from '~/styles';
 
 export const Wrapper = styled.div`
@@ -19,6 +19,12 @@ export const Wrapper = styled.div`
     background-position-y: 5px;
     font-size: 14px;
     cursor: pointer;
+
+    ${props =>
+      props.isFocused &&
+      css`
+        border-color: ${colors.focusedBorder};
+      `}
   }
 
   label {

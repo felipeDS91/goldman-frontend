@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { useField } from '@unform/core';
 import { Wrapper } from './styles';
+import { colors } from '../../styles';
 
 function customStyle() {
   return {
@@ -72,7 +73,7 @@ export default function ReactSelect({
   }, [fieldName, registerField, getValue]);
 
   return (
-    <Wrapper>
+    <Wrapper isFocused>
       {label && <label htmlFor={fieldName}>{label}</label>}
 
       <Select
@@ -87,6 +88,14 @@ export default function ReactSelect({
         getOptionValue={option => option.id}
         getOptionLabel={option => option.title}
         styles={customStyle()}
+        theme={theme => ({
+          ...theme,
+          borderRadius: 4,
+          colors: {
+            ...theme.colors,
+            primary: colors.focusedBorder,
+          },
+        })}
         {...rest}
       />
 

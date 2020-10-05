@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { colors } from '~/styles';
 
 export const Wrapper = styled.div`
@@ -19,6 +19,12 @@ export const Wrapper = styled.div`
     border: 1px solid ${colors.border};
     border-radius: 4px;
     padding: 14px;
+
+    ${props =>
+      props.isFocused &&
+      css`
+        border-color: ${colors.focusedBorder};
+      `}
 
     &::placeholder {
       color: ${colors.placeholder};

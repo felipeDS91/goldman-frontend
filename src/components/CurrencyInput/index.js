@@ -17,6 +17,7 @@ const CurrencyInput = forwardRef(
   ({ name, label, prepend, append, ...rest }, ref) => {
     const { fieldName, registerField, defaultValue, error } = useField(name);
     const [curr, setCurr] = useState(defaultValue);
+    const [isFocused, setIsFocused] = useState(false);
 
     if (!ref) ref = useRef(null);
 
@@ -42,6 +43,14 @@ const CurrencyInput = forwardRef(
       if (defaultValue && !curr) setCurr(defaultValue);
     }, [defaultValue]); // eslint-disable-line
 
+    const handleFocus = useCallback(() => {
+      setIsFocused(true);
+    }, []);
+
+    const handleBlur = useCallback(() => {
+      setIsFocused(false);
+    }, []);
+
     const props = {
       ...rest,
       ref,
@@ -51,6 +60,8 @@ const CurrencyInput = forwardRef(
       thousandSeparator: '.',
       prefix: 'R$ ',
       'aria-label': fieldName,
+      onFocus: handleFocus,
+      onBlur: handleBlur,
     };
 
     const renderAppend = useMemo(() => {
@@ -90,7 +101,7 @@ const CurrencyInput = forwardRef(
     }, [prepend, append, curr, props, renderAppend]);
 
     return (
-      <Wrapper>
+      <Wrapper isFocused={isFocused}>
         {label && <label htmlFor={fieldName}>{label}</label>}
         {renderInput}
         {error && <span>{error}</span>}

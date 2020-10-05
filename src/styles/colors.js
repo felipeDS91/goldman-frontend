@@ -9,6 +9,7 @@ const colors = {
   border: '#d6d7da',
   error: '#f66f91',
   darkerBackground: '#999',
+  focusedBorder: '#999',
 
   buttonFont: '#fff',
 };

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import Select from 'react-select/async';
 import PropTypes from 'prop-types';
-
 import { useField } from '@unform/core';
+import { colors } from '../../styles';
 
 import { Wrapper } from './styles';
 
@@ -87,6 +87,14 @@ export default function AsyncSelect({
         noOptionsMessage={() => 'Nenhum registro encontrado'}
         loadingMessage={() => 'Carregando...'}
         styles={customStyle()}
+        theme={theme => ({
+          ...theme,
+          borderRadius: 4,
+          colors: {
+            ...theme.colors,
+            primary: colors.focusedBorder,
+          },
+        })}
         {...rest}
       />
 

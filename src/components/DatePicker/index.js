@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { parseISO } from 'date-fns';
 import ReactDatePicker, {
   registerLocale,
@@ -24,9 +24,18 @@ export default function DatePicker({
   const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [selected, setSelected] = useState(undefined);
+  const [isFocused, setIsFocused] = useState(false);
 
   registerLocale('ptBR', ptBR);
   setDefaultLocale('ptBR');
+
+  const handleFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleBlur = useCallback(() => {
+    setIsFocused(false);
+  }, []);
 
   useEffect(() => {
     if (ref.current) {
@@ -46,7 +55,7 @@ export default function DatePicker({
   }, [defaultValue]); // eslint-disable-line
 
   return (
-    <Wrapper>
+    <Wrapper isFocused={isFocused}>
       <label htmlFor={fieldName}>{label}</label>
       <ReactDatePicker
         dateFormat="dd/MM/yyyy"
@@ -54,6 +63,8 @@ export default function DatePicker({
         customInput={readOnly ? <CustomDate /> : null}
         name={fieldName}
         selected={selected}
+        onFocus={handleFocus}
+        onCalendarClose={handleBlur}
         autoComplete="off"
         onChange={date => {
           if (onChange) onChange(date);
