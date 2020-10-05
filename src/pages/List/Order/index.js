@@ -189,7 +189,7 @@ export default function ListOrders() {
             ))
           ) : (
             <tr>
-              <td colSpan="4" align="center">
+              <td colSpan="5" align="center">
                 Nenhum registro encontrado.
               </td>
             </tr>
