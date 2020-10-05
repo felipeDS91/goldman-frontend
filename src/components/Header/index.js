@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 
 import {
+  IoIosContact,
   IoIosStats,
   IoIosCash,
   IoMdStats,
@@ -75,6 +76,12 @@ const reportMenu = [
     title: 'Relação de pedidos',
     classNames: 'dropdown__item',
     href: '/report-order',
+  },
+  {
+    Icon: IoIosContact,
+    title: 'Relação de clientes',
+    classNames: 'dropdown__item',
+    href: '/report-customer',
   },
 ];
 
