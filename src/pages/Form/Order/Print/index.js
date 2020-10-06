@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { IoIosArrowBack, IoMdPrint } from 'react-icons/io';
 import PropTypes from 'prop-types';
-import logo from '~/assets/logo-2.svg';
-import { formatDate, formatCNPJ, formatCPF, formatPrice } from '~/util/format';
+import { formatDate, formatCPF, formatPrice } from '~/util/format';
 
 import history from '~/services/history';
 import api from '~/services/api';
+import { useCompany } from '~/context/Company';
 
 import {
   Container,
@@ -29,7 +29,7 @@ import {
 export default function Print({ match }) {
   const { id } = match.params;
   const [order, setOrder] = useState({});
-  const [company, setCompany] = useState({});
+  const { company } = useCompany();
 
   const loadOrder = useCallback(async () => {
     const { data } = await api.get(`/print-order/${id}`);
@@ -62,21 +62,9 @@ export default function Print({ match }) {
     document.title = originalTitle;
   }, [order.id]);
 
-  const loadCompany = useCallback(async () => {
-    const { data } = await api.get(`/company`);
-
-    const dataFormatted = {
-      ...data,
-      cnpj: formatCNPJ(data.cnpj),
-    };
-
-    setCompany(dataFormatted);
-  }, []);
-
   useEffect(() => {
     loadOrder();
-    loadCompany();
-  }, [loadCompany, loadOrder]);
+  }, [loadOrder]);
 
   return (
     <Container>
@@ -98,7 +86,7 @@ export default function Print({ match }) {
           <HeaderRow>
             <Column width="155px">
               <HeaderRow>
-                <img src={logo} alt="GOLDMAN" />
+                <img src={company.logo_url} alt="GOLDMAN" />
               </HeaderRow>
             </Column>
             <Column width="100%">

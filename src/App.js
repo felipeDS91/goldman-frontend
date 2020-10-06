@@ -9,6 +9,8 @@ import './config/ReactotronConfig';
 import Routes from './routes';
 import history from './services/history';
 
+import CompanyProvider from '~/context/Company';
+
 import { store, persistor } from './store';
 
 import GlobalStyle from './styles/global';
@@ -16,15 +18,17 @@ import GlobalStyle from './styles/global';
 function App() {
   return (
     <Provider store={store}>
-      <ModalProvider>
-        <PersistGate persistor={persistor}>
-          <Router history={history}>
-            <Routes />
+      <CompanyProvider>
+        <ModalProvider>
+          <PersistGate persistor={persistor}>
+            <Router history={history}>
+              <Routes />
 
-            <GlobalStyle />
-          </Router>
-        </PersistGate>
-      </ModalProvider>
+              <GlobalStyle />
+            </Router>
+          </PersistGate>
+        </ModalProvider>
+      </CompanyProvider>
     </Provider>
   );
 }

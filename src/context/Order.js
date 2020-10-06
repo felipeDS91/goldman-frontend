@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const OrderContext = createContext();
 
@@ -39,3 +40,10 @@ export function useOrder() {
   const { order, setOrder, calculateTotal } = context;
   return { order, setOrder, calculateTotal };
 }
+
+OrderProvider.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]).isRequired,
+};

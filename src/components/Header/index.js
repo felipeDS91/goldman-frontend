@@ -15,9 +15,9 @@ import {
 import { FaTruck } from 'react-icons/fa';
 import { RiBillLine } from 'react-icons/ri';
 import { signOut } from '~/store/modules/auth/actions';
-import logo from '~/assets/logo-2.svg';
 import { Container, Content, Profile } from './styles';
 import NavMenu from '~/components/NavMenu';
+import { useCompany } from '~/context/Company';
 
 const registrationMenu = [
   {
@@ -87,6 +87,7 @@ const reportMenu = [
 
 export default function Header() {
   const dispatch = useDispatch();
+  const { company } = useCompany();
   const profile = useSelector(state => state.user.profile);
 
   const handleSignOut = useCallback(() => {
@@ -98,7 +99,7 @@ export default function Header() {
       <Content>
         <nav>
           <NavLink to="/home">
-            <img src={logo} alt="GOLDMAN" width="135" height="34" />
+            <img src={company.logo_url} alt="GOLDMAN" width="135" height="34" />
           </NavLink>
           <NavLink to="/list-customers">CLIENTES</NavLink>
           <NavLink to="/list-orders">PEDIDOS</NavLink>

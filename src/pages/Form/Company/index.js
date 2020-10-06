@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { IoIosArrowBack, IoIosCheckmark } from 'react-icons/io';
+import React, { useCallback } from 'react';
+import { IoIosArrowBack, IoIosCheckmark, IoIosImage } from 'react-icons/io';
 import * as Yup from 'yup';
 
 import { ToastSuccess, MessageError } from '~/components/Message';
@@ -8,7 +8,7 @@ import history from '~/services/history';
 import api from '~/services/api';
 import { unformat } from '~/util/format';
 
-import { Container } from './styles';
+import { Container, LogoInput } from './styles';
 
 import {
   TitlePage,
@@ -19,6 +19,8 @@ import {
   Row,
   Column,
 } from '~/styles/Default';
+
+import { useCompany } from '~/context/Company';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('Informe o nome.'),
@@ -40,13 +42,22 @@ const schema = Yup.object().shape({
 });
 
 export default function FormCompany() {
-  const [company, setCompany] = useState({});
+  const { company, setCompany } = useCompany();
 
-  const loadData = useCallback(async () => {
-    const response = await api.get(`/company`);
+  const handleLogoChange = useCallback(
+    e => {
+      if (e.target.files) {
+        const data = new FormData();
+        data.append('file', e.target.files[0]);
 
-    setCompany(response.data);
-  }, []);
+        api.patch('/company/logo', data).then(response => {
+          setCompany({ ...company, logo_name: response.data.logo_name });
+          ToastSuccess('Logo salvo com sucesso');
+        });
+      }
+    },
+    [company, setCompany]
+  );
 
   const handleSubmit = useCallback(async data => {
     try {
@@ -71,10 +82,6 @@ export default function FormCompany() {
     }
   }, []);
 
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
-
   return (
     <Container>
       <PageHeader>
@@ -97,7 +104,31 @@ export default function FormCompany() {
         schema={schema}
         onSubmit={handleSubmit}
       >
-        <Input name="name" label="Razão social" placeholder="Razão social" />
+        <Row>
+          <Column>
+            <Input
+              name="name"
+              label="Razão social"
+              placeholder="Razão social"
+            />
+          </Column>
+          <Column width="150px">
+            <LogoInput>
+              <img src={company.logo_url} alt={company.fantasy_name} />
+              <label htmlFor="logo">
+                <IoIosImage />
+                <input
+                  data-testid="input-file"
+                  type="file"
+                  accept="image/*"
+                  id="logo"
+                  onChange={handleLogoChange}
+                />
+              </label>
+            </LogoInput>
+          </Column>
+        </Row>
+
         <Input
           name="fantasy_name"
           label="Nome fantasia"

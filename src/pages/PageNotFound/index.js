@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegSadCry } from 'react-icons/fa';
 import { FiHome } from 'react-icons/fi';
-import logo from '~/assets/logo-original.svg';
+import logo from '~/assets/logo.svg';
 
 import { Container } from './styles';
 

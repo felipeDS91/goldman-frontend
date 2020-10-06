@@ -5,7 +5,7 @@ import { Form, Input } from '~/components';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
-import logo from '~/assets/logo.svg';
+import logo from '~/assets/logotipo.svg';
 
 const schema = Yup.object().shape({
   email: Yup.string()

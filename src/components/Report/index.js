@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   Header,
@@ -9,32 +9,16 @@ import {
   Title,
   TableWrapper,
 } from './styles';
-import logo from '~/assets/logo-2.svg';
-import { formatCNPJ, formatDate } from '~/util/format';
-import api from '~/services/api';
+import { formatDate } from '~/util/format';
+import { useCompany } from '~/context/Company';
 
 export default function Report({ children, columns, title }) {
-  const [company, setCompany] = useState({});
+  const { company } = useCompany();
   const totColumns = columns.props.children.length;
 
   const actualDate = useCallback(() => {
     return formatDate(new Date());
   }, []);
-
-  const loadCompany = useCallback(async () => {
-    const { data } = await api.get(`/company`);
-
-    const dataFormatted = {
-      ...data,
-      cnpj: formatCNPJ(data.cnpj),
-    };
-
-    setCompany(dataFormatted);
-  }, []);
-
-  useEffect(() => {
-    loadCompany();
-  }, [loadCompany]);
 
   return (
     <TableWrapper>
@@ -44,7 +28,7 @@ export default function Report({ children, columns, title }) {
             <td colSpan={totColumns} align="center">
               <Header>
                 <HeaderLeft>
-                  <img src={logo} alt="GOLDMAN" />
+                  <img src={company.logo_url} alt="GOLDMAN" />
                 </HeaderLeft>
                 <HeaderCenter>
                   <HeaderRow style={{ fontWeight: 'bold', fontSize: '16px' }}>
