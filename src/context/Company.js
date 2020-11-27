@@ -22,7 +22,7 @@ export default function CompanyProvider({ children }) {
       ...data,
       cnpj: formatCNPJ(data.cnpj),
       logo_url: data.logo_name
-        ? `${process.env.REACT_APP_API_URL}files/${company.logo_name}`
+        ? `${process.env.REACT_APP_API_URL}/files/${company.logo_name}`
         : 'https://res.cloudinary.com/dixtjpk8s/image/upload/v1601900815/Goldman/logo-2__rfeaal.svg',
     });
   }, [company.logo_name]);
