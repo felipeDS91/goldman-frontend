@@ -18,6 +18,8 @@ export default function CompanyProvider({ children }) {
   const signed = useSelector(state => state.auth.signed);
 
   const loadCompany = useCallback(async () => {
+    if (!signed) return;
+
     const { data } = await api.get('/company');
 
     setCompany({
@@ -27,7 +29,7 @@ export default function CompanyProvider({ children }) {
         ? `${process.env.REACT_APP_API_URL}files/${data.logo_name}`
         : 'https://res.cloudinary.com/dixtjpk8s/image/upload/v1601900815/Goldman/logo-2__rfeaal.svg',
     });
-  }, []);
+  }, [signed]);
 
   useEffect(() => {
     loadCompany();
