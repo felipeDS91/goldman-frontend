@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { formatCNPJ } from '~/util/format';
 
 import api from '~/services/api';
@@ -14,6 +15,7 @@ const CompanyContext = createContext();
 
 export default function CompanyProvider({ children }) {
   const [company, setCompany] = useState({});
+  const signed = useSelector(state => state.auth.signed);
 
   const loadCompany = useCallback(async () => {
     const { data } = await api.get('/company');
@@ -22,14 +24,14 @@ export default function CompanyProvider({ children }) {
       ...data,
       cnpj: formatCNPJ(data.cnpj),
       logo_url: data.logo_name
-        ? `${process.env.REACT_APP_API_URL}files/${company.logo_name}`
+        ? `${process.env.REACT_APP_API_URL}files/${data.logo_name}`
         : 'https://res.cloudinary.com/dixtjpk8s/image/upload/v1601900815/Goldman/logo-2__rfeaal.svg',
     });
-  }, [company.logo_name]);
+  }, []);
 
   useEffect(() => {
     loadCompany();
-  }, [loadCompany]);
+  }, [loadCompany, signed]);
 
   return (
     <CompanyContext.Provider value={{ company, setCompany }}>
